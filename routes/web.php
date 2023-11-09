@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\RolController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +17,13 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+/** 
+ * Rutas para roles
+*/
+
+Route::get('/formulario_roles', function () {
+    return view('roles');
+});
+
+Route::post('/insertar_roles', [RolController::class, "store"])->name('rol.store');
