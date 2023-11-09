@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('nombre_completo');
             $table->date('fecha_nacimiento');
             $table->string('no_identidad');
-            $table->string('correo_propietario')->unique();
             $table->boolean('estado');
             $table->timestamps();
         });
