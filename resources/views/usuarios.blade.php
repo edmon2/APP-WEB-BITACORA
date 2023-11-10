@@ -35,7 +35,20 @@
                     <input type="password" class="form-control" id="contraseña_usuario" name="contraseña_usuario" required>
                 </div>
 
+              <div class="form-group">
 
+                <select name="tipo_usuario">
+                    
+                    <option value="" selected>Selecciona un tipo de usuario</option>
+                    @foreach ($roles as $rol)
+                         {{ $rol->nombre }} {{-- Suponiendo que la tabla tiene una columna 'nombre' --}}
+                 @endforeach
+                    <option value="1">Administrador</option>
+                    <option value="2">Usuario regular</option>
+                    <option value="3">Invitado</option>
+                </select>
+        
+              </div>
                     <div class="form-group">
                         <label for="estado_usuario" class="mb-2">Estado del Usuario:</label>
                         <select class="form-control" id="estado_usuario" name="estado_usuario">
@@ -44,6 +57,7 @@
                         </select>
                     </div>
 
+                    
                     <div class="text-center mt-3">
                         <button type="submit" class="btn btn-primary">Guardar Usuario</button>
                     </div>
@@ -53,6 +67,7 @@
 
         {{$nombre_rol}}
 
+        
         @if (session('exito'))
             <br>
             <div class="alert alert-success">

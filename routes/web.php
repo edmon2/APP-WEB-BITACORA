@@ -29,7 +29,7 @@ Route::get('/formulario_roles', function () {
 });
 
 Route::get('/formulario_usuarios', function () {
-    return view('usuarios')->with(['nombre_rol'=>'Rol_1','id'=>1]);
+    return view('usuarios')->with(['roles'=>RolController::class, "show"]);
 });
 
 Route::post('/insertar_roles', [RolController::class, "store"])->name('rol.store');

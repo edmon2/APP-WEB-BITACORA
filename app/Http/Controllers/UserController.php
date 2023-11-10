@@ -17,7 +17,7 @@ class UserController extends Controller
 
         ]);
 
-        $usuario = new Usuarios();
+        $usuario = new User();
         $usuario->name = $request->input('nombre_usuario');
         $usuario->email = $request->input('correo_usuario');
         $usuario->password = $request->input('contraseña_usuario');
