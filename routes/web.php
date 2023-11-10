@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RolController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,4 +27,9 @@ Route::get('/formulario_roles', function () {
     return view('roles');
 });
 
+Route::get('/formulario_usuarios', function () {
+    return view('usuarios')->with(['nombre_rol'=>'Rol_1','id'=>1]);
+});
+
 Route::post('/insertar_roles', [RolController::class, "store"])->name('rol.store');
+Route::post('/insertar_usuarios', [UserController::class, "store"])->name('usuario.store');
