@@ -2,7 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RolController;
-use App\Http\Controllers\EntregaController;use App\Http\Controllers\PropietarioController;
+use App\Http\Controllers\EntregaController;
+use App\Http\Controllers\PropietarioController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\EquipoController;
 
@@ -51,8 +52,6 @@ Route::post('/insertar_propietarios', [PropietarioController::class, "store"])->
 Route::get('/formulario_equipos',[EquipoController::class, "returnView"])->name('equipo.returnView');
 Route::post('/equipos_guardar', [EquipoController::class, 'store'])->name('equipo.store');
 
-Route::get('/formulario_entregas', function () {
-    return view('entregas');
-});
+Route::get('/formulario_entregas',[EntregaController::class, "returnView"])->name('entrega.returnView');
 
 Route::post('/insertar_entregas', [EntregaController::class, "store"])->name('entrega.store');
