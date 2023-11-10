@@ -39,15 +39,17 @@ class RolController extends Controller
         $rol->save();
         
         return redirect('/formulario_roles')->with('exito', 'El rol se ha guardado correctamente');
-
+        
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Rol $rol)
+    public function show()
     {
-        //
+        $roles=Rol::all();
+       
+        return $roles;
     }
 
     /**
