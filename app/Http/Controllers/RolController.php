@@ -5,6 +5,18 @@ namespace App\Http\Controllers;
 use App\Models\Rol;
 use Illuminate\Http\Request;
 
+class Persona
+{
+    public $nombre;
+    public $edad;
+
+    // Constructor
+    public function __construct($nombre, $edad)
+    {
+        $this->nombre = $nombre;
+        $this->edad = $edad;
+    }
+}
 class RolController extends Controller
 {
     /**
@@ -29,25 +41,25 @@ class RolController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nombre_rol'=>'required',
-            'estado_rol'=>'required',
+            'nombre_rol' => 'required|min:2|string',
+            'estado_rol' => 'required|boolean',
         ]);
 
         $rol = new Rol();
         $rol->descripcion_rol = $request->input('nombre_rol');
         $rol->estado_rol = $request->input('estado_rol');
         $rol->save();
-        
-        return redirect('/formulario_roles')->with('exito', 'El rol se ha guardado correctamente');
 
+        return redirect('/formulario_roles')->with('exito', 'El rol se ha guardado correctamente');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Rol $rol)
+
+    public function show()
     {
-        //
+
     }
 
     /**
