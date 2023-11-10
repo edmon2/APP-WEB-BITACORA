@@ -25,7 +25,7 @@ class UserController extends Controller
         $usuario->password = $request->input('contraseña_usuario');
         $usuario->estado = $request->input('estado_usuario');
         $usuario->id_rol = $request->input('tipo_usuario');
-        $usuario->id_propietario = 1;
+        $usuario->id_propietario = $request->input('propietario');
         $usuario->save();
 
         return redirect('/formulario_usuarios')->with('exito', 'El usuario se ha guardado correctamente');
