@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RolController;
-
+use App\Http\Controllers\EntregaController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -27,3 +27,9 @@ Route::get('/formulario_roles', function () {
 });
 
 Route::post('/insertar_roles', [RolController::class, "store"])->name('rol.store');
+
+Route::get('/formulario_entregas', function () {
+    return view('entregas');
+});
+
+Route::post('/insertar_entregas', [EntregaController::class, "store"])->name('entrega.store');

@@ -50,7 +50,7 @@ return [
             'port' => env('DB_PORT', '3306'),
             'database' => env('DB_DATABASE', 'recepcionequiposgrupoh'),
             'username' => env('DB_USERNAME', 'seminario_user'),
-            'password' => env('DB_PASSWORD', 'Manino10*'),
+            'password' => env('DB_PASSWORD', 'seminario'),
             'unix_socket' => env('DB_SOCKET', ''),
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
