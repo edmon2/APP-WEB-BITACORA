@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 use App\Models\Entrega;
+use App\Models\Equipo;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 
@@ -32,7 +34,6 @@ class EntregaController extends Controller
         $request->validate([
             'id_equipo'=>'required',
             'id_usuario'=>'required',
-            'fecha_entrega'=>'required',
             'observaciones'=>'required',
 
         ]);
@@ -40,15 +41,20 @@ class EntregaController extends Controller
         $entrega = new Entrega();
         $entrega->id_equipo = $request->input('id_equipo');
         $entrega->id_usuario = $request->input('id_usuario');
-        $entrega->fecha_entrega = $request->input('fecha_entrega');
-        $entrega->observaciones = $request->input('observaciones');
-
+        $entrega->observaciones = $request->input('observaciones');;
+        $entrega->fecha_entrega = now();
         $entrega->save();
-        
-        return redirect('/formulario_roles')->with('exito', 'Se ha guardado correctamente');
+
+        return redirect('/formulario_entregas')->with('exito', 'Se ha guardado correctamente');
 
     }
+    public function returnView()
+    {
+        $equipos = Equipo::all();
+        $usuarios = User::all();
 
+        return view('entregas',['equipos'=> $equipos,'usuarios'=> $usuarios]);
+    }
     /**
      * Display the specified resource.
      */
