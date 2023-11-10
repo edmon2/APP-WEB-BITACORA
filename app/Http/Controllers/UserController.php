@@ -12,11 +12,12 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nombre_usuario'=>'required',
-            'correo_usuario'=>'required',
-            'contraseña_usuario'=>'required',
-            'estado_usuario'=>'required',
-
+            'nombre_usuario'=>'required|string|min:2',
+            'correo_usuario'=>'required|email',
+            'contraseña_usuario'=>'required|alpha_num|min:8|max:50',
+            'estado_usuario'=>'required|boolean',
+            'tipo_usuario'=>'required|integer',
+            'propietario'=>'required|integer',
         ]);
 
         $usuario = new User();

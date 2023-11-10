@@ -41,8 +41,8 @@ class RolController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nombre_rol' => 'required',
-            'estado_rol' => 'required',
+            'nombre_rol' => 'required|min:2|string',
+            'estado_rol' => 'required|boolean',
         ]);
 
         $rol = new Rol();

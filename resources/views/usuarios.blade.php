@@ -108,22 +108,31 @@
                 {{ $errors->first('nombre_usuario') }}
             </div>
         @endif
-    </div>
 
-    @if ($errors->has('rol_usuario'))
+        @if ($errors->has('tipo_usuario'))
         <br>
         <div class="alert alert-danger">
             {{ $errors->first('rol_usuario') }}
         </div>
-    @endif
+        @endif
+        </div>
+
+        @if ($errors->has('contraseña_usuario'))
+            <br>
+            <div class="alert alert-danger">
+                {{ $errors->first('contraseña_usuario') }}
+            </div>
+        @endif
+
+        @if ($errors->has('propietario'))
+            <br>
+            <div class="alert alert-danger">
+                {{ $errors->first('propietario') }}
+            </div>
+        @endif
     </div>
 
-    @if ($errors->has('contraseña_usuario'))
-        <br>
-        <div class="alert alert-danger">
-            {{ $errors->first('contraseña_usuario') }}
-        </div>
-    @endif
+   
     </div>
 
 
