@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RolController;
+use App\Http\Controllers\PropietarioController;
 use App\Http\Controllers\UserController;
 
 /*
@@ -33,3 +34,13 @@ Route::get('/formulario_usuarios', function () {
 
 Route::post('/insertar_roles', [RolController::class, "store"])->name('rol.store');
 Route::post('/insertar_usuarios', [UserController::class, "store"])->name('usuario.store');
+
+/** 
+ * Rutas para propietarios
+*/
+
+Route::get('/formulario_propietarios', function () {
+    return view('propietarios');
+});
+
+Route::post('/insertar_propietarios', [PropietarioController::class, "store"])->name('propietario.store');
