@@ -76,7 +76,24 @@ if(isset($_POST['fecha_entrega'])) {
                 {{session('exito')}}
             </div>
         @endif
-
+        @if ($errors->has('id_equipo'))
+            <br>
+            <div class="alert alert-danger">
+                {{ $errors->first('id_equipo') }}
+            </div>
+        @endif
+        @if ($errors->has('id_usuario'))
+            <br>
+            <div class="alert alert-danger">
+                {{ $errors->first('id_usuario') }}
+            </div>
+        @endif
+        @if ($errors->has('observaciones'))
+            <br>
+            <div class="alert alert-danger">
+                {{ $errors->first('observaciones') }}
+            </div>
+        @endif
 
 
     </div>

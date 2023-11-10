@@ -32,9 +32,9 @@ class EntregaController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'id_equipo'=>'required',
-            'id_usuario'=>'required',
-            'observaciones'=>'required',
+            'id_equipo'=>'required|integer',
+            'id_usuario'=>'required|integer',
+            'observaciones'=>'required|string|min:2|max:255',
 
         ]);
 
