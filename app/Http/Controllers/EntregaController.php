@@ -41,9 +41,8 @@ class EntregaController extends Controller
         $entrega = new Entrega();
         $entrega->id_equipo = $request->input('id_equipo');
         $entrega->id_usuario = $request->input('id_usuario');
-        $entrega->fecha_entrega = $request->input('fecha_entrega');
-        $entrega->observaciones = $request->input('observaciones');
-
+        $entrega->observaciones = $request->input('observaciones');;
+        $entrega->fecha_entrega = now();
         $entrega->save();
 
         return redirect('/formulario_entregas')->with('exito', 'Se ha guardado correctamente');

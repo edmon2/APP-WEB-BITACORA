@@ -32,7 +32,7 @@ if(isset($_POST['fecha_entrega'])) {
 
                             <option value="" selected>Selecciona el equipo</option>
                             @foreach ($equipos as $equipo)
-                                <option value="{{ $equipo->id_equipo }}"> {{ $equipo->tipo_equipo  }}-{{ $equipo->no_serie  }}</option>
+                                <option value="{{ $equipo->id }}"> {{ $equipo->tipo_equipo  }}-{{ $equipo->no_serie  }}</option>
                             @endforeach
 
                         </select>
