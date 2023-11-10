@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RolController;
 use App\Http\Controllers\PropietarioController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\EquipoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,3 +43,10 @@ Route::get('/formulario_propietarios', function () {
 });
 
 Route::post('/insertar_propietarios', [PropietarioController::class, "store"])->name('propietario.store');
+
+/**
+ * Rutas para equipos
+ */
+
+Route::get('/formulario_equipos',[EquipoController::class, "returnView"])->name('equipo.returnView');
+Route::post('/equipos_guardar', [EquipoController::class, 'store'])->name('equipo.store');
