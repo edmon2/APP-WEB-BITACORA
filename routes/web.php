@@ -40,7 +40,12 @@ Route::get('/formulario_roles', function () {
  * Rutas para devoluciones
  */
 Route::get('/devoluciones',[DevolucionController::class, "index"])->name('devoluciones.index');
-
+Route::get('/devoluciones/create', [DevolucionController::class, "create"])->name('devoluciones.create');
+Route::get('/devoluciones/{devolucion}', [DevolucionController::class, 'show'])->name('devoluciones.show');
+Route::get('/devoluciones/edit/{devolucion}', [DevolucionController::class, "edit"])->name('devoluciones.edit');
+Route::put('/devoluciones/{devolucion}', [DevolucionController::class, 'update'])->name('devoluciones.update');
+Route::post('/devoluciones', [DevolucionController::class, "store"])->name('devoluciones.store');
+Route::delete('/devoluciones/{devolucion}', [DevolucionController::class, 'destroy'])->name('devoluciones.destroy');
 
 /**
  * Rutas para Usuarios
@@ -60,7 +65,7 @@ Route::get('/propietarios/{propietario}', [PropietarioController::class, 'show']
 Route::get('/propietarios', [PropietarioController::class, "index"])->name('propietarios.index');
 Route::get('/propietarios/edit/{propietario}', [PropietarioController::class, "edit"])->name('propietarios.edit');
 Route::put('/propietarios/{propietario}', [PropietarioController::class, 'update'])->name('propietarios.update');
-Route::post('/propietarios', [PropietarioController::class, "store"])->name('propietario.store');
+Route::post('/propietarios', [PropietarioController::class, "store"])->name('propietarios.store');
 Route::delete('/propietarios/{propietario}', [PropietarioController::class, 'destroy'])->name('propietarios.destroy');
 
 /**

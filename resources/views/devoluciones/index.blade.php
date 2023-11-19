@@ -27,11 +27,10 @@
                     <tr>
                         <td>{{ $devolucion->fecha_devolucion}}</td>
                         <td>{{ $devolucion->observaciones}}</td>
-                        {{-- <td>{{ $propietario->fecha_nacimiento }}</td> --}}
 
                         <!-- botones -->
-                        {{-- <td><a href="{{route('propietarios.show', $propietario->id)}}" class="btn btn-info">Ver Detalles</a></td>
-                        <td><a href="{{route('propietarios.edit', $propietario->id)}}" class="btn btn-warning">Editar</a></td> --}}
+                        <td><a href="{{route('devoluciones.show', $devolucion->id)}}" class="btn btn-info">Ver Detalles</a></td>
+                        <td><a href="{{route('devoluciones.edit', $devolucion->id)}}" class="btn btn-warning">Editar</a></td> 
                         <td><button type="button" class="btn btn-danger" data-bs-toggle="modal"
                                 data-bs-target="#exampleModal{{ $indice }}">
                                 Eliminar
@@ -43,7 +42,7 @@
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Eliminar Propietario</h1>
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Eliminar Devolucion</h1>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
@@ -51,7 +50,7 @@
                                         ¿Desea eliminar esta devolucion?
                                     </div>
                                     <div class="modal-footer">
-                                        <form action="" method="post">
+                                        <form action="{{route('devoluciones.destroy', $equipo->id)}}" method="post">
                                             @method('DELETE')
                                             @csrf
                                             <button type="button" class="btn btn-secondary"
