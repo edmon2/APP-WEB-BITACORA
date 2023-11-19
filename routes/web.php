@@ -26,6 +26,8 @@ Route::get('/', function () {
     return view('home');
 })->name('home');
 
+
+
 /**
  * Rutas para roles
 */
@@ -33,6 +35,17 @@ Route::get('/', function () {
 Route::get('/formulario_roles', function () {
     return view('roles');
 });
+
+/**
+ * Rutas para devoluciones
+ */
+Route::get('/devoluciones',[DevolucionController::class, "index"])->name('devoluciones.index');
+Route::get('/devoluciones/create', [DevolucionController::class, "create"])->name('devoluciones.create');
+Route::get('/devoluciones/{devolucion}', [DevolucionController::class, 'show'])->name('devoluciones.show');
+Route::get('/devoluciones/edit/{devolucion}', [DevolucionController::class, "edit"])->name('devoluciones.edit');
+Route::put('/devoluciones/{devolucion}', [DevolucionController::class, 'update'])->name('devoluciones.update');
+Route::post('/devoluciones', [DevolucionController::class, "store"])->name('devoluciones.store');
+Route::delete('/devoluciones/{devolucion}', [DevolucionController::class, 'destroy'])->name('devoluciones.destroy');
 
 /**
  * Rutas para Usuarios
@@ -66,6 +79,7 @@ Route::get('/equipos/{usuario}', [EquipoController::class, 'show'])->name('equip
 Route::get('/equipos/edit/{usuario}', [EquipoController::class, "edit"])->name('equipos.edit');
 Route::put('/equipos/{usuario}', [EquipoController::class, 'update'])->name('equipos.update');
 Route::delete('/equipos/{usuario}', [EquipoController::class, 'destroy'])->name('equipos.destroy');
+
 
 Route::get('/formulario_equipos',[EquipoController::class, "returnView"])->name('equipo.returnView');
 Route::post('/equipos_guardar', [EquipoController::class, 'store'])->name('equipo.store');

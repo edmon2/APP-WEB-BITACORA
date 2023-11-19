@@ -36,7 +36,7 @@
                         <a class="nav-link" href="#">Entregas</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Devoluciones</a>
+                        <a class="nav-link" href="{{ route('devoluciones.index') }}">Devoluciones</a>
                     </li>
                 </ul>
                 <div class="d-flex" role="search">
