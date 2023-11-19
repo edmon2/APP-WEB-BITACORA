@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class EquipoController extends Controller
 {
-    
+
     public function store(Request $request)
     {
         // Validación de campos
@@ -18,7 +18,7 @@ class EquipoController extends Controller
             'id_usuario' => 'required|integer',
             'estado_equipo' => 'required|boolean',
         ]);
-        
+
         $equipo = new Equipo();
         $equipo->no_serie = $request->input('no_serie');
         $equipo->tipo_equipo = $request->input('tipo_equipo');
@@ -34,5 +34,11 @@ class EquipoController extends Controller
     {
         $usuarios = User::all();
         return view('equipos',['usuarios'=> $usuarios]);
+    }
+
+    public function index()
+    {
+        $equipos = Equipo::all();
+        return view('equipos.index', compact('equipos'));
     }
 }
