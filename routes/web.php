@@ -26,6 +26,8 @@ Route::get('/', function () {
     return view('home');
 })->name('home');
 
+
+
 /**
  * Rutas para roles
 */
@@ -33,6 +35,12 @@ Route::get('/', function () {
 Route::get('/formulario_roles', function () {
     return view('roles');
 });
+
+/**
+ * Rutas para devoluciones
+ */
+Route::get('/devoluciones',[DevolucionController::class, "index"])->name('devoluciones.index');
+
 
 /**
  * Rutas para Usuarios
@@ -58,6 +66,7 @@ Route::delete('/propietarios/{propietario}', [PropietarioController::class, 'des
 /**
  * Rutas para equipos
  */
+
 
 Route::get('/formulario_equipos',[EquipoController::class, "returnView"])->name('equipo.returnView');
 Route::post('/equipos_guardar', [EquipoController::class, 'store'])->name('equipo.store');
