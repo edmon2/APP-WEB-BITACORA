@@ -18,10 +18,13 @@ use App\Http\Controllers\DevolucionController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+/**
+ * Home
+ */
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('home');
+})->name('home');
 
 /**
  * Rutas para roles
@@ -40,11 +43,13 @@ Route::post('/insertar_usuarios', [UserController::class, "store"])->name('usuar
  * Rutas para propietarios
 */
 
-Route::get('/formulario_propietarios', function () {
-    return view('propietarios');
-});
-
-Route::post('/insertar_propietarios', [PropietarioController::class, "store"])->name('propietario.store');
+Route::get('/propietarios/create', [PropietarioController::class, "create"])->name('propietarios.create');
+Route::get('/propietarios/{propietario}', [PropietarioController::class, 'show'])->name('propietarios.show');
+Route::get('/propietarios', [PropietarioController::class, "index"])->name('propietarios.index');
+Route::get('/propietarios/edit/{propietario}', [PropietarioController::class, "edit"])->name('propietarios.edit');
+Route::put('/propietarios/{propietario}', [PropietarioController::class, 'update'])->name('propietarios.update');
+Route::post('/propietarios', [PropietarioController::class, "store"])->name('propietario.store');
+Route::delete('/propietarios/{propietario}', [PropietarioController::class, 'destroy'])->name('propietarios.destroy');
 
 /**
  * Rutas para equipos

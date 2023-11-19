@@ -4,76 +4,86 @@ namespace App\Http\Controllers;
 
 use App\Models\Propietario;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PropietarioController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
-        //
+        $propietarios = Propietario::all();
+        return view('propietarios.index', compact('propietarios'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('propietarios.create');
     }
 
-    /**
-     * Insercion dde datos a la BD
-     */
     public function store(Request $request)
     {
         $request->validate([
-            'nombre_completo'=>'required|string',
-            'fecha_nac'=>'required|date',
-            'identidad'=>'required|string|max:13|min:13',
-            'estado_propietario'=>'required|boolean',
+            'nombre_completo' => 'required|string',
+            'fecha_nac' => 'required|date',
+            'identidad' => 'required|string|max:13|min:13',
+            'imagen' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
+            'direccion' => 'required',
         ]);
+
+        $imagePath = $request->file('imagen')->store('post_images', 'public');
 
         $propietario = new Propietario();
         $propietario->nombre_completo = $request->input('nombre_completo');
         $propietario->fecha_nacimiento = $request->input('fecha_nac');
         $propietario->no_identidad = $request->input('identidad');
-        $propietario->estado = $request->input('estado_propietario');
+        $propietario->imagen = $imagePath;
+        $propietario->direccion = $request->input('direccion');
         $propietario->save();
 
-        return redirect('/formulario_propietarios')->with('exito', 'El propietario se ha guardado correctamente');
+        return redirect()->route('propietarios.create')->with('exito', 'El propietario se ha guardado correctamente');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Propietario $propietario)
     {
-        //
+        return view('propietarios.show', compact('propietario'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Propietario $propietario)
     {
-        //
+        return view('propietarios.edit', compact('propietario'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Propietario $propietario)
     {
-        //
+        $request->validate([
+            'nombre_completo' => 'required|string',
+            'fecha_nac' => 'required|date',
+            'identidad' => 'required|string|max:13|min:13',
+            'imagen' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            'direccion' => 'required',
+        ]);
+
+        if ($request->hasFile('imagen')) {
+            Storage::disk('public')->delete($propietario->imagen);
+            $imagePath = $request->file('imagen')->store('post_images', 'public');
+        } else {
+            $imagePath = $propietario->imagen;
+        }
+
+        $propietario->update([
+            'nombre_completo' => $request->input('nombre_completo'),
+            'fecha_nacimiento' => $request->input('fecha_nac'),
+            'no_identidad' => $request->input('identidad'),
+            'imagen' => $imagePath,
+            'direccion' => $request->input('direccion'),
+        ]);
+
+        return redirect()->route('propietarios.index')->with('exito', 'El propietario se ha actualizado correctamente');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Propietario $propietario)
     {
-        //
+        $propietario->delete();
+        return redirect()->route('propietarios.index')->with('exito', 'El propietario se ha eliminado correctamente');
     }
 }
