@@ -34,7 +34,11 @@ Route::get('/formulario_roles', function () {
     return view('roles');
 });
 
-Route::get('/formulario_usuarios',[UserController::class, "returnView"])->name('usuario.returnView');
+/**
+ * Rutas para Usuarios
+*/
+
+Route::get('/users',[UserController::class, "index"])->name('users.index');
 
 Route::post('/insertar_roles', [RolController::class, "store"])->name('rol.store');
 Route::post('/insertar_usuarios', [UserController::class, "store"])->name('usuario.store');

@@ -33,11 +33,9 @@ class UserController extends Controller
 
     }
 
-    public function returnView()
+    public function index()
     {
-        $roles = Rol::all();
-        $Propietarios = Propietario::all();
-
-        return view('usuarios',['roles'=> $roles,'propietarios'=> $Propietarios]);
+        $users = User::all();
+        return view('users.index', compact('users'));
     }
 }

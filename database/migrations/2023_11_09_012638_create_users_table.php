@@ -17,14 +17,13 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->unsignedInteger('id_rol');
+            $table->string('rol');
             $table->unsignedInteger('id_propietario');
-            $table->boolean('estado');
+            $table->softDeletes();
             $table->rememberToken();
             $table->timestamps();
 
             #llaves foraneas
-            $table->foreign('id_rol')->references('id')->on('roles');
             $table->foreign('id_propietario')->references('id')->on('propietarios');
         });
     }
