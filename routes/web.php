@@ -65,7 +65,7 @@ Route::get('/propietarios/{propietario}', [PropietarioController::class, 'show']
 Route::get('/propietarios', [PropietarioController::class, "index"])->name('propietarios.index');
 Route::get('/propietarios/edit/{propietario}', [PropietarioController::class, "edit"])->name('propietarios.edit');
 Route::put('/propietarios/{propietario}', [PropietarioController::class, 'update'])->name('propietarios.update');
-Route::post('/propietarios', [PropietarioController::class, "store"])->name('propietarios.store');
+Route::post('/propietarios', [PropietarioController::class, "store"])->name('propietario.store');
 Route::delete('/propietarios/{propietario}', [PropietarioController::class, 'destroy'])->name('propietarios.destroy');
 
 /**
