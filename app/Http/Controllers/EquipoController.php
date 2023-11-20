@@ -15,18 +15,16 @@ class EquipoController extends Controller
         $request->validate([
             'no_serie' => 'required|string|max:15|min:15',
             'tipo_equipo' => 'required|string|min:1|max:50',
-            'id_usuario' => 'required|integer',
-            'estado_equipo' => 'required|boolean',
+            'id_usuario' => 'required|integer'
         ]);
 
         $equipo = new Equipo();
         $equipo->no_serie = $request->input('no_serie');
         $equipo->tipo_equipo = $request->input('tipo_equipo');
         $equipo->id_usuario = $request->input('id_usuario');
-        $equipo->estado = $request->input('estado_equipo');
         $equipo->save();
 
-        return redirect('/formulario_equipos')->with('exito', 'El equipo se ha guardado correctamente');
+        return redirect()->route('equipos.create')->with('exito', 'El equipo se ha guardado correctamente');
 
     }
 
@@ -40,5 +38,15 @@ class EquipoController extends Controller
     {
         $equipos = Equipo::all();
         return view('equipos.index', compact('equipos'));
+    }
+    public function create()
+    {
+        $usuarios = User::all();
+        return view('equipos.create', compact('usuarios'));
+    }
+    public function show(Equipo $equipo)
+    {
+        $usuario = User::find($equipo->id_usuario);
+        return view('equipos.show', compact('usuario','equipo'));
     }
 }
