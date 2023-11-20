@@ -11,7 +11,7 @@
     <div class="container mt-5">
         <h2>Devoluciones</h2>
         <br>
-        {{-- <a href="{{ route('propietarios.create') }}" class="btn btn-primary mb-3">Crear Propietario</a> --}}
+         <a href="{{ route('devoluciones.create') }}" class="btn btn-primary mb-3">Crear Devolucion</a> 
         <table class="table">
             <thead>
                 <tr>
@@ -50,7 +50,7 @@
                                         ¿Desea eliminar esta devolucion?
                                     </div>
                                     <div class="modal-footer">
-                                        <form action="{{route('devoluciones.destroy', $equipo->id)}}" method="post">
+                                        <form action="{{route('devoluciones.destroy', $devolucion->id)}}" method="post">
                                             @method('DELETE')
                                             @csrf
                                             <button type="button" class="btn btn-secondary"
