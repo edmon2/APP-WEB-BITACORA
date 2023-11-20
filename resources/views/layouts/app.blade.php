@@ -33,7 +33,7 @@
                         <a class="nav-link" href="{{ route('users.index') }}">Usuarios</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Entregas</a>
+                        <a class="nav-link" href="{{ route('entregas.index') }}">Entregas</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('devoluciones.index') }}">Devoluciones</a>
