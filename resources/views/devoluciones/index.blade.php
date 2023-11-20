@@ -5,34 +5,32 @@
 @extends('layouts.app')
 
 @section('titulo')
-    Recepcion-Equipos | Usuarios
+    Recepcion-Equipos | Devoluciones
 @endsection
 @section('content')
     <div class="container mt-5">
-        <h2>Usuarios</h2>
+        <h2>Devoluciones</h2>
         <br>
-        <a href="{{ route('users.create') }}" class="btn btn-primary mb-3">Crear Usuario</a>
+        {{-- <a href="{{ route('propietarios.create') }}" class="btn btn-primary mb-3">Crear Propietario</a> --}}
         <table class="table">
             <thead>
                 <tr>
-                    <th>Nombre de Usuario</th>
-                    <th>Rol</th>
-                    {{-- <th>Fecha de Nacimiento</th> --}}
+                    <th>Fecha de Devolucion</th>
+                    <th>Observaciones</th>
                     <th>Ver Detalles</th>
                     <th>Editar</th>
                     <th>Eliminar</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($users as $user)
+                @foreach ($devoluciones as $devolucion)
                     <tr>
-                        <td>{{ $user->name }}</td>
-                        <td>{{ $user->rol }}</td>
-                        {{-- <td>{{ $propietario->fecha_nacimiento }}</td> --}}
+                        <td>{{ $devolucion->fecha_devolucion}}</td>
+                        <td>{{ $devolucion->observaciones}}</td>
 
                         <!-- botones -->
-                        {{-- <td><a href="{{route('users.show', $user->id)}}" class="btn btn-info">Ver Detalles</a></td>
-                        <td><a href="{{route('users.edit', $user->id)}}" class="btn btn-warning">Editar</a></td> --}}
+                        <td><a href="{{route('devoluciones.show', $devolucion->id)}}" class="btn btn-info">Ver Detalles</a></td>
+                        <td><a href="{{route('devoluciones.edit', $devolucion->id)}}" class="btn btn-warning">Editar</a></td> 
                         <td><button type="button" class="btn btn-danger" data-bs-toggle="modal"
                                 data-bs-target="#exampleModal{{ $indice }}">
                                 Eliminar
@@ -44,15 +42,15 @@
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Eliminar Propietario</h1>
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Eliminar Devolucion</h1>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        ¿Desea eliminar este propietario?
+                                        ¿Desea eliminar esta devolucion?
                                     </div>
                                     <div class="modal-footer">
-                                        <form action="" method="post">
+                                        <form action="{{route('devoluciones.destroy', $equipo->id)}}" method="post">
                                             @method('DELETE')
                                             @csrf
                                             <button type="button" class="btn btn-secondary"

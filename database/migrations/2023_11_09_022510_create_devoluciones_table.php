@@ -18,6 +18,7 @@ return new class extends Migration
             $table->unsignedInteger('id_usuario');
             $table->timestamp('fecha_devolucion');
             $table->string('observaciones');
+            $table->softDeletes();
             $table->timestamps();
     
             #llaves foraneas

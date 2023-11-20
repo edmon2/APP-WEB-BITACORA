@@ -35,4 +35,10 @@ class DevolucionController extends Controller
 
         return view('devoluciones',['usuarios'=> $usuarios,'equipos'=> $equipos]);
     }
+
+    public function index()
+    {
+        $devoluciones = Devolucion::all();
+        return view('devoluciones.index', compact('devoluciones'));
+    }
 }
