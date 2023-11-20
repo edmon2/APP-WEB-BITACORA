@@ -48,7 +48,7 @@ class EntregaController extends Controller
         $entrega->fecha_entrega = now();
         $entrega->save();
 
-        return redirect()->route('entregas.index')->with('exito', 'Se ha guardado correctamente la entrega');
+        return redirect()->route('entregas.create')->with('exito', 'Se ha guardado correctamente la entrega');
 
     }
     /**

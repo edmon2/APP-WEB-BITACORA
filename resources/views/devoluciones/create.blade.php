@@ -23,14 +23,7 @@
         @endif
         <div class="card-body">
             <form action="{{ route('devoluciones.store') }}" method="POST" enctype="multipart/form-data">
-                @csrf
-                <div class="form-group mb-3">
-                    <label for="observaciones" class="mb-2">Observaciones:</label>
-                    <input type="text" class="form-control" id="observaciones" name="observaciones" required>
-                </div>
-
-                
-                    
+                @csrf                                                 
                 <div class="form-group mb-3">
                     <label for="id_equipo" class="form-label">Usuario:</label>
                     <select name="id_usuario" class="form-control" id="id_usuario">
@@ -52,6 +45,11 @@
                         @endforeach
                     </select>
 
+                </div>
+
+                <div class="form-group mb-3">
+                    <label for="observaciones" class="mb-2">Observaciones:</label>
+                    <textarea class="form-control" name="observaciones" id="observaciones" rows="4" required></textarea>
                 </div>
 
                 <div class="text-left mt-3">

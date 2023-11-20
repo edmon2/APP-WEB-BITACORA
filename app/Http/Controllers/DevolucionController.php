@@ -25,7 +25,7 @@ class DevolucionController extends Controller
         $devolucion->fecha_devolucion = now();
         $devolucion->save();
     
-        return redirect()->route('devoluciones.index')->with('exito', 'Se ha guardado correctamente la devolucion');
+        return redirect()->route('devoluciones.create')->with('exito', 'Se ha guardado correctamente la devolucion');
     }
 
    

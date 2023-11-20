@@ -26,7 +26,7 @@
                 @csrf
                
                 <div class="form-group mb-3">
-                <label for="equipos" class="form-label">Equipos:</label>
+                <label for="equipos" class="form-label">Equipo:</label>
                         <select name="id_equipo" class="form-control" id="id_equipo">
 
                             <option value="" selected>Selecciona el equipo</option>
@@ -38,7 +38,7 @@
                 </div>
 
                 <div class="form-group mb-3">
-                <label for="usuarios" class="form-label">Usuarios:</label>
+                <label for="usuarios" class="form-label">Usuario:</label>
                         <select name="id_usuario" class="form-control" id="id_usuario">
 
                             <option value="" selected>Selecciona el usuario</option>
@@ -53,7 +53,7 @@
 
                 <div class="form-group mb-3">
                     <label for="observaciones" class="mb-2">Observaciones:</label>
-                    <input type="text" class="form-control" id="observaciones" name="observaciones" required>
+                    <textarea class="form-control" name="observaciones" id="observaciones" rows="4" required></textarea>
                 </div>
 
                 <div class="text-left mt-3">
