@@ -45,7 +45,7 @@
 
                     
                     <div class="form-group mb-3">
-                        <label for="correo" class="form-label">Propietario:</label>
+                        <label for="propietario" class="form-label">Propietario:</label>
                         <select name="propietario" class="form-control" id="propietario">
 
                             <option value="" selected>Selecciona el propietario</option>

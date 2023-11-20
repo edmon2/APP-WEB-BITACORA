@@ -72,9 +72,9 @@ class UserController extends Controller
         ]);
 
         $user->update([
-            'name' => $request->input('nombre_usuario'),
-            'rol' => $request->input('tipo_usuario'),
+            'name' => $request->input('nombre_usuario'),            
             'email'=> $request->input('correo_usuario'),
+            'rol' => $request->input('tipo_usuario'),
             'id_propietario' => $request->input('propietario'),
         ]);        
 
