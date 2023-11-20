@@ -57,4 +57,9 @@ class DevolucionController extends Controller
         return view('devoluciones.edit', compact('usuarios', 'devoluciones'));
     }
    
+    public function destroy(Devolucion $devolucion)
+    {
+        $devolucion->delete();
+        return redirect()->route('devoluciones.index')->with('exito', 'La devolucion se ha eliminado correctamente');
+    }
 }
