@@ -11,7 +11,7 @@
     <div class="container mt-5">
         <h2>Equipos</h2>
         <br>
-        {{-- <a href="{{ route('equipos.create') }}" class="btn btn-primary mb-3">Crear Equipos</a> --}}
+        <a href="{{ route('equipos.create') }}" class="btn btn-primary mb-3">Crear Equipos</a>
         <table class="table">
             <thead>
                 <tr>

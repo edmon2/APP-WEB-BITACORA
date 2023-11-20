@@ -75,14 +75,14 @@ Route::delete('/propietarios/{propietario}', [PropietarioController::class, 'des
  */
 Route::get('/equipos',[EquipoController::class, "index"])->name('equipos.index');
 Route::get('/equipos/create', [EquipoController::class, "create"])->name('equipos.create');
-Route::get('/equipos/{usuario}', [EquipoController::class, 'show'])->name('equipos.show');
-Route::get('/equipos/edit/{usuario}', [EquipoController::class, "edit"])->name('equipos.edit');
-Route::put('/equipos/{usuario}', [EquipoController::class, 'update'])->name('equipos.update');
-Route::delete('/equipos/{usuario}', [EquipoController::class, 'destroy'])->name('equipos.destroy');
+Route::get('/equipos/{equipo}', [EquipoController::class, 'show'])->name('equipos.show');
+Route::get('/equipos/edit/{equipo}', [EquipoController::class, "edit"])->name('equipos.edit');
+Route::put('/equipos/{equipo}', [EquipoController::class, 'update'])->name('equipos.update');
+Route::delete('/equipos/{equipo}', [EquipoController::class, 'destroy'])->name('equipos.destroy');
 
 
 Route::get('/formulario_equipos',[EquipoController::class, "returnView"])->name('equipo.returnView');
-Route::post('/equipos_guardar', [EquipoController::class, 'store'])->name('equipo.store');
+Route::post('/equipos_guardar', [EquipoController::class, 'store'])->name('equipos.store');
 
 Route::get('/formulario_entregas',[EntregaController::class, "returnView"])->name('entrega.returnView');
 
