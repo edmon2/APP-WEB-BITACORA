@@ -15,7 +15,8 @@ class EntregaController extends Controller
      */
     public function index()
     {
-        //
+        $entregas = Entrega::all();
+        return View('entregas.index', compact('entregas'));
     }
 
     /**
@@ -23,7 +24,7 @@ class EntregaController extends Controller
      */
     public function create()
     {
-        //
+        return view('entregas.create');
     }
 
     /**
@@ -48,27 +49,17 @@ class EntregaController extends Controller
         return redirect('/formulario_entregas')->with('exito', 'Se ha guardado correctamente');
 
     }
-    public function returnView()
-    {
-        $equipos = Equipo::all();
-        $usuarios = User::all();
-
-        return view('entregas',['equipos'=> $equipos,'usuarios'=> $usuarios]);
-    }
     /**
      * Display the specified resource.
      */
     public function show(Entrega $entrega)
     {
-        //
+        return View('entregas.show',compact('entrega'));
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
+    
     public function edit(Entrega $entrega)
     {
-        //
+        return View('entregas.edit',compact('entrega'));
     }
 
     /**
@@ -76,14 +67,33 @@ class EntregaController extends Controller
      */
     public function update(Request $request, Entrega $entrega)
     {
-        //
+        $request->validate([
+        'observacion' => $request->input('observacion'),
+        ]);
     }
+
+
+    public function returnView()
+    {
+        $equipos = Equipo::all();
+        $usuarios = User::all();
+
+        return view('entregas',['equipos'=> $equipos,'usuarios'=> $usuarios]);
+    }
+    
+    
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(Entrega $entrega)
     {
-        //
+        $entrega->delete();
+        return redirect()->route('entregas.index')->with('Exito', 'Se ha eliminado');
     }
 }
