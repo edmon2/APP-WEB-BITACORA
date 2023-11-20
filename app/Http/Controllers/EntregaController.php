@@ -24,7 +24,9 @@ class EntregaController extends Controller
      */
     public function create()
     {
-        return view('entregas.create');
+        $usuarios = User::all();
+        $equipos = Equipo::all();
+        return view('entregas.create', compact('usuarios', 'equipos'));
     }
 
     /**
@@ -46,7 +48,7 @@ class EntregaController extends Controller
         $entrega->fecha_entrega = now();
         $entrega->save();
 
-        return redirect('/formulario_entregas')->with('exito', 'Se ha guardado correctamente');
+        return redirect()->route('entregas.index')->with('exito', 'Se ha guardado correctamente la entrega');
 
     }
     /**
@@ -73,13 +75,6 @@ class EntregaController extends Controller
     }
 
 
-    public function returnView()
-    {
-        $equipos = Equipo::all();
-        $usuarios = User::all();
-
-        return view('entregas',['equipos'=> $equipos,'usuarios'=> $usuarios]);
-    }
     
     
 
