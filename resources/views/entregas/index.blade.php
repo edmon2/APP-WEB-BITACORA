@@ -11,7 +11,7 @@
     <div class="container mt-5">
         <h2>Entregas</h2>
         <br>
-       <!--<a href="{{ route('propietarios.create') }}" class="btn btn-primary mb-3">Crear Propietario</a>-->
+       <a href="{{ route('entregas.create') }}" class="btn btn-primary mb-3">Crear Entrega</a>
         <table class="table">
             <thead>
                 <tr>
@@ -23,7 +23,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($entregas as $entregas)
+                @foreach ($entregas as $entrega)
                     <tr>
                         <td>{{ $entrega->fecha_entrega}}</td>
                         <td>{{ $entrega->observaciones }}</td>
@@ -50,7 +50,7 @@
                                         ¿Desea eliminar este propietario?
                                     </div>
                                     <div class="modal-footer">
-                                        <form action="{{route('propietarios.destroy', $propietario->id)}}" method="post">
+                                        <form action="{{route('entregas.destroy', $entrega->id)}}" method="post">
                                             @method('DELETE')
                                             @csrf
                                             <button type="button" class="btn btn-secondary"
