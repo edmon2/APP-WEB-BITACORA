@@ -26,7 +26,7 @@ if(isset($_POST['fecha_entrega'])) {
             <div class="card-body">
                 <form action="{{route('entrega.store')}}" method="POST">
                     @csrf
-                    <div class="form-group">
+                    <div class="form-group ">
                         <label for="correo" class="form-label">Equipos:</label>
                         <select name="id_equipo" class="form-control" id="id_equipo">
 

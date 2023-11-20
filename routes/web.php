@@ -71,6 +71,17 @@ Route::post('/propietarios', [PropietarioController::class, "store"])->name('pro
 Route::delete('/propietarios/{propietario}', [PropietarioController::class, 'destroy'])->name('propietarios.destroy');
 
 /**
+ * Rutas para Entregas
+ */
+Route::get('/entregas/create', [EntregaController::class, "create"])->name('entregas.create');
+Route::get('/entregas/{entrega}', [EntregaController::class, 'show'])->name('entregas.show');
+Route::get('/entregas', [EntregaController::class, "index"])->name('entregas.index');
+Route::get('/entregas/edit/{entrega}', [EntregaController::class, "edit"])->name('entregas.edit');
+Route::put('/entregas/{entrega}', [EntregaController::class, 'update'])->name('entregas.update');
+Route::post('/entregas', [EntregaController::class, "store"])->name('entregas.store');
+Route::delete('/entregas/{entrega}', [EntregaController::class, 'destroy'])->name('entregas.destroy');
+
+/**
  * Rutas para equipos
  */
 Route::get('/equipos',[EquipoController::class, "index"])->name('equipos.index');
