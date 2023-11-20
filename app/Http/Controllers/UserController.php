@@ -42,4 +42,10 @@ class UserController extends Controller
         $propietarios = Propietario::all();
         return view('users.create', compact('propietarios'));
     }
+
+    public function show(User $user)
+    {
+        $propietario=Propietario::find($user->id_propietario);
+        return view('users.show', compact('propietario','user'));
+    }
 }

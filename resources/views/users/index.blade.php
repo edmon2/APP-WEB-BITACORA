@@ -31,8 +31,8 @@
                         {{-- <td>{{ $propietario->fecha_nacimiento }}</td> --}}
 
                         <!-- botones -->
-                        {{-- <td><a href="{{route('users.show', $user->id)}}" class="btn btn-info">Ver Detalles</a></td>
-                        <td><a href="{{route('users.edit', $user->id)}}" class="btn btn-warning">Editar</a></td> --}}
+                        <td><a href="{{route('users.show', $user->id)}}" class="btn btn-info">Ver Detalles</a></td>
+                        <td><a href="{{route('users.edit', $user->id)}}" class="btn btn-warning">Editar</a></td>
                         <td><button type="button" class="btn btn-danger" data-bs-toggle="modal"
                                 data-bs-target="#exampleModal{{ $indice }}">
                                 Eliminar
