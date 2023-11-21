@@ -49,4 +49,31 @@ class EquipoController extends Controller
         $usuario = User::find($equipo->id_usuario);
         return view('equipos.show', compact('usuario','equipo'));
     }
+    public function edit(Equipo $equipo)
+    {
+        $usuarios = User::all();
+        return view('equipos.edit', compact('equipo','usuarios'));
+    }
+    public function update(Request $request, Equipo $equipo)
+    {
+        $request->validate([
+            'no_serie' => 'required|string|max:15|min:15',
+            'tipo_equipo' => 'required|string|min:1|max:50',
+            'id_usuario' => 'required|integer'
+        ]);
+
+
+        $equipo->update([
+            'no_serie' => $request->input('no_serie'),
+            'tipo_equipo' => $request->input('tipo_equipo'),
+            'id_usuario' => $request->input('id_usuario'),
+        ]);
+
+        return redirect()->route('equipos.create')->with('exito', $request->input('id_usuario'));
+    }
+    public function destroy(Equipo $equipo)
+    {
+        $equipo->delete();
+        return redirect()->route('equipos.index')->with('exito', 'El equipo se ha eliminado correctamente');
+    }
 }

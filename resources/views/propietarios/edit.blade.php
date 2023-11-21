@@ -54,8 +54,8 @@
                     <button type="submit" class="btn btn-primary">Actualizar Propietario</button>
                     <a href="{{route('propietarios.index')}}" class="btn btn-warning">Regresar</a>
                 </div>
-                
+
             </form>
-        </div>        
+        </div>
     </div>
 @endsection
