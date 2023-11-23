@@ -26,8 +26,8 @@ class EntregaController extends Controller
      */
     public function create()
     {
-        $usuarios = User::all();
-        $equipos = Equipo::all();
+        $usuarios = User::where('rol', 'Estudiante')->get();
+        $equipos = Equipo::where('entregado', '0')->get();
         return view('entregas.create', compact('usuarios', 'equipos'));
     }
 

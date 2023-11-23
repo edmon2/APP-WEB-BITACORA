@@ -15,5 +15,6 @@ class Equipo extends Model
         'no_serie',
         'tipo_equipo',
         'id_usuario',
+        'entregado',
     ];
 }

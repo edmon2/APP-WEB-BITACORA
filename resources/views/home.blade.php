@@ -5,7 +5,7 @@
 @endsection
 @section('content')
     <div class="container">     
-        <div class="text-center" style="height: 70vh; display: flex; align-items: center; justify-content: center;">
+        <div class="text-center" style="height: 80vh; display: flex; align-items: center; justify-content: center;">
             <div>
                 <h2 class="mb-4">Bienvenido al Sistema UserX</h2>        
                 <p>{{ \Carbon\Carbon::now()->toDateString() }}</p>        

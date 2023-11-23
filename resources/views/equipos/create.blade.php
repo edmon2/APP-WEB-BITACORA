@@ -38,7 +38,7 @@
                     <label for="id_usuario" class="form-label">Usuario Propietario:</label>
                     <select name="id_usuario" class="form-control" id="id_usuario">
 
-                        <option value="" selected>Selecciona un tipo de usuario</option>
+                        <option value="" selected>Selecciona un usuario(por defecto admin)</option>
                         @foreach ($usuarios as $usuario)
                             <option value="{{ $usuario->id }}"> {{ $usuario->name }}</option>
                         @endforeach

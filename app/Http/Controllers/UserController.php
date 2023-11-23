@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-use App\Models\Rol;
 use App\Models\Propietario;
 
 class UserController extends Controller
@@ -40,7 +39,7 @@ class UserController extends Controller
                     $mensajeError = 'El correo proporcionado ya está en uso.';
                     break;
                 default:
-                    $mensajeError = 'Ocurrió un error durante la actualización.';
+                    $mensajeError = 'Ocurrió un error durante la insercion.';
                     break;
             }
 
@@ -83,22 +82,41 @@ class UserController extends Controller
     }
 
     public function update(Request $request, User $user)
-    {
-        $request->validate([
-            'nombre_usuario' => 'required|string|min:2',
-            'correo_usuario' => 'required|email',
-            'tipo_usuario' => 'required|string',
-            'propietario' => 'required|integer',
-        ]);
+    {               
+        try {
 
-        $user->update([
-            'name' => $request->input('nombre_usuario'),
-            'email' => $request->input('correo_usuario'),
-            'rol' => $request->input('tipo_usuario'),
-            'id_propietario' => $request->input('propietario'),
-        ]);
+            $request->validate([
+                'nombre_usuario' => 'required|string|min:2',
+                'correo_usuario' => 'required|email',
+                'tipo_usuario' => 'required|string',
+                'propietario' => 'required|integer',
+            ]);
+    
+            $user->update([
+                'name' => $request->input('nombre_usuario'),
+                'email' => $request->input('correo_usuario'),
+                'rol' => $request->input('tipo_usuario'),
+                'id_propietario' => $request->input('propietario'),
+            ]);
 
-        return redirect()->route('users.index')->with('exito', 'El usuario se ha correctamente');
+            return redirect()->route('users.index')->with('exito', 'El usuario se ha correctamente');
+
+        } catch (\Illuminate\Database\QueryException $ex) {
+
+            $errorCode = $ex->getCode();
+
+            switch ($errorCode) {
+                case 23000:
+                    $mensajeError = 'El correo proporcionado ya está en uso.';
+                    break;
+                default:
+                    $mensajeError = 'Ocurrió un error durante la actualización.';
+                    break;
+            }
+
+            $errors = ['base_de_datos' => $mensajeError];
+            return redirect()->route('users.edit', compact('user', 'request'))->withErrors($errors);
+        }
 
     }
 }

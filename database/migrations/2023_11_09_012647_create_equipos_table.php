@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('no_serie');
             $table->string('tipo_equipo');
             $table->unsignedInteger('id_usuario');
+            $table->boolean('entregado');
             $table->softDeletes();
             $table->timestamps();
 

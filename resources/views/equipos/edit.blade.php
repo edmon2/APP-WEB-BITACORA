@@ -40,22 +40,26 @@
                 <div class="form-group mb-3">
                     <label for="id_usuario" class="form-label">Usuario Propietario:</label>
                     <select name="id_usuario" class="form-control" id="id_usuario">
-
-                        <option value="" selected>Selecciona un usuario</option>
                         @foreach ($usuarios as $usuario)
                             @if ($equipo->id_usuario == $usuario->id)
-                            <option value="{{ $usuario->id }}" selected> {{ $usuario->name }}</option>
+                                <option value="{{ $usuario->id }}" selected> {{ $usuario->name }}</option>
                             @else
                                 <option value="{{ $usuario->id }}"> {{ $usuario->name }}</option>
                             @endif
-
                         @endforeach
 
                     </select>
 
                 </div>
 
+                <div class="form-group mb-3">
+                    <label for="estado" class="form-label">Estado:</label>
+                    <select name="estado" class="form-control" id="estado">
+                        <option value="0" {{ $equipo->entregado == '0' ? 'selected' : '' }}>Sin Asignar</option>
+                        <option value="1" {{ $equipo->entregado == '1' ? 'selected' : '' }}>Asignado</option>
+                    </select>
 
+                </div>
 
                 <div class="text-left mt-3">
                     <button type="submit" class="btn btn-primary">Actualizar Equipo</button>

@@ -40,8 +40,8 @@ class DevolucionController extends Controller
 
     public function create()
     {   
-        $equipos = equipo::all();
-        $usuarios = User::all();
+        $equipos = equipo::where('entregado', '1')->get();
+        $usuarios = User::where('rol', 'Estudiante')->get();
         return view('devoluciones.create', compact('usuarios' ,'equipos'));
     }
 

@@ -23,6 +23,7 @@ class EquipoController extends Controller
         $equipo->no_serie = $request->input('no_serie');
         $equipo->tipo_equipo = $request->input('tipo_equipo');
         $equipo->id_usuario = $request->input('id_usuario');
+        $equipo->entregado = 0;
         $equipo->save();
 
         return redirect()->route('equipos.create')->with('exito', 'El equipo se ha guardado correctamente');
@@ -44,7 +45,7 @@ class EquipoController extends Controller
     }
     public function create()
     {
-        $usuarios = User::all();
+        $usuarios = User::where('rol', 'Admin')->get();
         return view('equipos.create', compact('usuarios'));
     }
     public function show(Equipo $equipo)
@@ -55,7 +56,7 @@ class EquipoController extends Controller
     }
     public function edit(Equipo $equipo)
     {
-        $usuarios = User::all();
+        $usuarios = User::where('rol', 'Estudiante')->get();
         return view('equipos.edit', compact('equipo','usuarios'));
     }
     public function update(Request $request, Equipo $equipo)
@@ -63,7 +64,8 @@ class EquipoController extends Controller
         $request->validate([
             'no_serie' => 'required|string|max:15|min:15',
             'tipo_equipo' => 'required|string|min:1|max:50',
-            'id_usuario' => 'required|integer'
+            'id_usuario' => 'required|integer',
+            'estado' => 'required|boolean',
         ]);
 
 
@@ -71,6 +73,7 @@ class EquipoController extends Controller
             'no_serie' => $request->input('no_serie'),
             'tipo_equipo' => $request->input('tipo_equipo'),
             'id_usuario' => $request->input('id_usuario'),
+            'entregado' => $request->input('estado'),
         ]);
 
         return redirect()->route('equipos.index')->with('exito', 'El equipo se ha actualizado correctamente');

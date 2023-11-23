@@ -41,8 +41,6 @@
                 <div class="form-group mb-3">
                     <label for="correo" class="form-label">Usuario:</label>
                     <select name="users" class="form-control" id="users">
-
-                        <option value="" selected>Selecciona el Usuario</option>
                         @foreach ($usuarios as $user)
                             <option value="{{ $usuarios->id }}"> {{ $usuarios->name }}</option>
                         @endforeach
