@@ -8,11 +8,12 @@
         <h2>Detalles del Equipo</h2>
         <br>
         <div class="card-body">
-            <br>
             <p><strong>Nº Serie:</strong> {{ $equipo->no_serie }}</p>
             <p><strong>Equipo:</strong> {{ $equipo->tipo_equipo }}</p>
-            <p><strong>Usuario:</strong> {{ $usuario->name }}</p>
-
+            <br>
+            <p><strong>Datos del Propietario del Equipo</strong></p>
+            <p><strong>Usuario del Propietario:</strong> {{ $usuario->name }}</p>
+            <p><strong>Nombre del Propietario:</strong> {{ $propietario->nombre_completo }}</p>
             <div class="text-left mt-3">
                 <a href="{{route('equipos.index')}}" class="btn btn-warning">Regresar</a>
             </div>

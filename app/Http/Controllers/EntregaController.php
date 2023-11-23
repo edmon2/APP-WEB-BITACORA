@@ -13,10 +13,12 @@ class EntregaController extends Controller
      /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $entregas = Entrega::all();
-        return View('entregas.index', compact('entregas'));
+        $noFilas = $request->input('rowsNumber', 5);
+
+        $entregas = Entrega::paginate($noFilas);
+        return View('entregas.index', compact('entregas', 'noFilas'));
     }
 
     /**

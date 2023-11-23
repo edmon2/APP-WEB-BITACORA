@@ -30,10 +30,12 @@ class DevolucionController extends Controller
 
    
 
-    public function index()
+    public function index(Request $request)
     {
-        $devoluciones = Devolucion::all();
-        return view('devoluciones.index', compact('devoluciones'));
+        $noFilas = $request->input('rowsNumber', 5);
+
+        $devoluciones = Devolucion::paginate($noFilas);
+        return view('devoluciones.index', compact('devoluciones', 'noFilas'));
     }
 
     public function create()

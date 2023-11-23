@@ -9,10 +9,12 @@ use Illuminate\Support\Facades\Storage;
 class PropietarioController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        $propietarios = Propietario::all();
-        return view('propietarios.index', compact('propietarios'));
+        $noFilas = $request->input('rowsNumber', 5);
+
+        $propietarios = Propietario::paginate($noFilas);
+        return view('propietarios.index', compact('propietarios', 'noFilas'));
     }
 
     public function create()

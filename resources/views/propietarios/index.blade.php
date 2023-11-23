@@ -1,5 +1,6 @@
 @php
     $indice = 0;
+    $listaNoFilas = [5, 10, 25, 50, 100];
 @endphp
 
 @extends('layouts.app')
@@ -11,8 +12,21 @@
     <div class="container mt-5">
         <h2>Propietarios</h2>
         <br>
-        <a href="{{ route('propietarios.create') }}" class="btn btn-primary mb-3">Crear Propietario</a>
-        <table class="table">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <a href="{{ route('propietarios.create') }}" class="btn btn-primary mb-3">Crear Propietario</a>
+            
+            <!-- Opción de escoger las filas a mostrar en la tabla -->
+            <form action="{{ route('propietarios.index') }}" method="GET" class="form-inline">
+                <label for="rowsNumber" class="mr-2">Filas por página:</label>
+                <select name="rowsNumber" id="rowsNumber" class="form-control" onchange="this.form.submit()">
+                    @foreach ($listaNoFilas as $option)
+                        <option value="{{ $option }}" {{ $noFilas == $option ? 'selected' : '' }}>
+                            {{ $option }}</option>
+                    @endforeach
+                </select>
+            </form>
+        </div>
+            <table class="table">
             <thead>
                 <tr>
                     <th>Identidad</th>
@@ -71,5 +85,8 @@
                 @endforeach
             </tbody>
         </table>
+        <div>
+            {{ $propietarios->appends(['rowsNumber' => $noFilas])->links() }}
+        </div>
     </div>
 @endsection

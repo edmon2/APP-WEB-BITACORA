@@ -50,10 +50,12 @@ class UserController extends Controller
 
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::all();
-        return view('users.index', compact('users'));
+        $noFilas = $request->input('rowsNumber', 5);
+        
+        $users = User::paginate($noFilas);
+        return view('users.index', compact('users','noFilas'));
     }
 
     public function create()

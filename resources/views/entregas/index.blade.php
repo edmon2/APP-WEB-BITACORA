@@ -1,5 +1,6 @@
 @php
     $indice = 0;
+    $listaNoFilas = [5, 10, 25, 50, 100];
 @endphp
 
 @extends('layouts.app')
@@ -11,7 +12,20 @@
     <div class="container mt-5">
         <h2>Entregas</h2>
         <br>
-       <a href="{{ route('entregas.create') }}" class="btn btn-primary mb-3">Crear Entrega</a>
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <a href="{{ route('entregas.create') }}" class="btn btn-primary mb-3">Crear Entrega</a>
+        
+            <!-- Opción de escoger las filas a mostrar en la tabla -->
+            <form action="{{ route('entregas.index') }}" method="GET" class="form-inline">
+                <label for="rowsNumber" class="mr-2">Filas por página:</label>
+                <select name="rowsNumber" id="rowsNumber" class="form-control" onchange="this.form.submit()">
+                    @foreach ($listaNoFilas as $option)
+                        <option value="{{ $option }}" {{ $noFilas == $option ? 'selected' : '' }}>
+                            {{ $option }}</option>
+                    @endforeach
+                </select>
+            </form>
+        </div>
         <table class="table">
             <thead>
                 <tr>
@@ -25,12 +39,12 @@
             <tbody>
                 @foreach ($entregas as $entrega)
                     <tr>
-                        <td>{{ $entrega->fecha_entrega}}</td>
+                        <td>{{ $entrega->fecha_entrega }}</td>
                         <td>{{ $entrega->observaciones }}</td>
 
                         <!-- botones -->
-                        <td><a href="{{route('entregas.show', $entrega->id)}}" class="btn btn-info">Ver Detalles</a></td>
-                        <td><a href="{{route('entregas.edit', $entrega->id)}}" class="btn btn-warning">Editar</a></td>
+                        <td><a href="{{ route('entregas.show', $entrega->id) }}" class="btn btn-info">Ver Detalles</a></td>
+                        <td><a href="{{ route('entregas.edit', $entrega->id) }}" class="btn btn-warning">Editar</a></td>
                         <td><button type="button" class="btn btn-danger" data-bs-toggle="modal"
                                 data-bs-target="#exampleModal{{ $indice }}">
                                 Eliminar
@@ -50,7 +64,7 @@
                                         ¿Desea eliminar este propietario?
                                     </div>
                                     <div class="modal-footer">
-                                        <form action="{{route('entregas.destroy', $entrega->id)}}" method="post">
+                                        <form action="{{ route('entregas.destroy', $entrega->id) }}" method="post">
                                             @method('DELETE')
                                             @csrf
                                             <button type="button" class="btn btn-secondary"
@@ -70,5 +84,8 @@
                 @endforeach
             </tbody>
         </table>
+        <div>
+            {{ $entregas->appends(['rowsNumber' => $noFilas])->links() }}
+        </div> 
     </div>
 @endsection

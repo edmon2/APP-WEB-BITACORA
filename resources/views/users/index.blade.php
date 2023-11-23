@@ -1,5 +1,6 @@
 @php
     $indice = 0;
+    $listaNoFilas = [5, 10, 25, 50, 100];
 @endphp
 
 @extends('layouts.app')
@@ -11,7 +12,20 @@
     <div class="container mt-5">
         <h2>Usuarios</h2>
         <br>
-        <a href="{{ route('users.create') }}" class="btn btn-primary mb-3">Crear Usuario</a>
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <a href="{{ route('users.create') }}" class="btn btn-primary mb-3">Crear Usuario</a>
+        
+            <!-- Opción de escoger las filas a mostrar en la tabla -->
+            <form action="{{ route('users.index') }}" method="GET" class="form-inline">
+                <label for="rowsNumber" class="mr-2">Filas por página:</label>
+                <select name="rowsNumber" id="rowsNumber" class="form-control" onchange="this.form.submit()">
+                    @foreach ($listaNoFilas as $option)
+                        <option value="{{ $option }}" {{ $noFilas == $option ? 'selected' : '' }}>
+                            {{ $option }}</option>
+                    @endforeach
+                </select>
+            </form>
+        </div>
         <table class="table">
             <thead>
                 <tr>
@@ -31,8 +45,8 @@
                         {{-- <td>{{ $propietario->fecha_nacimiento }}</td> --}}
 
                         <!-- botones -->
-                        <td><a href="{{route('users.show', $user->id)}}" class="btn btn-info">Ver Detalles</a></td>
-                        <td><a href="{{route('users.edit', $user->id)}}" class="btn btn-warning">Editar</a></td>
+                        <td><a href="{{ route('users.show', $user->id) }}" class="btn btn-info">Ver Detalles</a></td>
+                        <td><a href="{{ route('users.edit', $user->id) }}" class="btn btn-warning">Editar</a></td>
                         <td><button type="button" class="btn btn-danger" data-bs-toggle="modal"
                                 data-bs-target="#exampleModal{{ $indice }}">
                                 Eliminar
@@ -52,7 +66,7 @@
                                         ¿Desea eliminar este propietario?
                                     </div>
                                     <div class="modal-footer">
-                                        <form action="{{route('users.destroy', $user->id)}}" method="post">
+                                        <form action="{{ route('users.destroy', $user->id) }}" method="post">
                                             @method('DELETE')
                                             @csrf
                                             <button type="button" class="btn btn-secondary"
@@ -72,5 +86,8 @@
                 @endforeach
             </tbody>
         </table>
+        <div>
+            {{ $users->appends(['rowsNumber' => $noFilas])->links() }}
+        </div>   
     </div>
 @endsection

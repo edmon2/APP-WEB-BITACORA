@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Equipo;
+use App\Models\Propietario;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -34,10 +35,12 @@ class EquipoController extends Controller
         return view('equipos',['usuarios'=> $usuarios]);
     }
 
-    public function index()
-    {
-        $equipos = Equipo::all();
-        return view('equipos.index', compact('equipos'));
+    public function index(Request $request)
+    {       
+        $noFilas = $request->input('rowsNumber', 5);
+        
+        $equipos = Equipo::paginate($noFilas);
+        return view('equipos.index', compact('equipos', 'noFilas'));
     }
     public function create()
     {
@@ -47,7 +50,8 @@ class EquipoController extends Controller
     public function show(Equipo $equipo)
     {
         $usuario = User::find($equipo->id_usuario);
-        return view('equipos.show', compact('usuario','equipo'));
+        $propietario = Propietario::find($usuario->id_propietario);
+        return view('equipos.show', compact('usuario', 'propietario','equipo'));
     }
     public function edit(Equipo $equipo)
     {
@@ -69,7 +73,7 @@ class EquipoController extends Controller
             'id_usuario' => $request->input('id_usuario'),
         ]);
 
-        return redirect()->route('equipos.create')->with('exito', $request->input('id_usuario'));
+        return redirect()->route('equipos.index')->with('exito', 'El equipo se ha actualizado correctamente');
     }
     public function destroy(Equipo $equipo)
     {
