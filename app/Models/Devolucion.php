@@ -11,6 +11,12 @@ class Devolucion extends Model
     use HasFactory;
     protected $table = 'devoluciones';
 
+    protected $fillable = [
+        'id_equipo',
+        'id_usuario',
+        'observaciones',
+    ];
+
     // Relación con Usuario
     public function usuario()
     {
