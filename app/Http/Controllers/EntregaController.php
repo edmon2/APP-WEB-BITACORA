@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Entrega;
 use App\Models\Equipo;
 use App\Models\User;
@@ -10,7 +11,7 @@ use Illuminate\Http\Request;
 
 class EntregaController extends Controller
 {
-     /**
+    /**
      * Display a listing of the resource.
      */
     public function index(Request $request)
@@ -37,18 +38,23 @@ class EntregaController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'id_equipo'=>'required|integer',
-            'id_usuario'=>'required|integer',
-            'observaciones'=>'required|string|min:2|max:255',
+            'id_equipo' => 'required|integer',
+            'id_usuario' => 'required|integer',
+            'observaciones' => 'required|string|min:2|max:255',
 
         ]);
 
         $entrega = new Entrega();
         $entrega->id_equipo = $request->input('id_equipo');
         $entrega->id_usuario = $request->input('id_usuario');
-        $entrega->observaciones = $request->input('observaciones');;
+        $entrega->observaciones = $request->input('observaciones');
         $entrega->fecha_entrega = now();
         $entrega->save();
+
+        /* Actulizacion al campo del equipo para que podamos devolverlo
+        de porque ya se asigno a un estudiante*/
+        $entrega->equipo->entregado = 1;
+        $entrega->equipo->save();
 
         return redirect()->route('entregas.create')->with('exito', 'Se ha guardado correctamente la entrega');
 
@@ -57,15 +63,17 @@ class EntregaController extends Controller
      * Display the specified resource.
      */
     public function show(Entrega $entrega)
-    {
-        return View('entregas.show',compact('entrega'));
+    {   
+        $usuario = User::find($entrega->id_usuario);
+        $equipo = Equipo::find($entrega->id_equipo);
+        return View('entregas.show', compact('entrega', 'usuario', 'equipo'));
     }
-    
+
     public function edit(Entrega $entrega)
     {
         $usuarios = User::where('rol', 'Estudiante')->get();
         $equipos = Equipo::all();
-        return View('entregas.edit',compact('usuarios', 'equipos' , 'entrega'));
+        return View('entregas.edit', compact('usuarios', 'equipos', 'entrega'));
     }
 
     /**
@@ -74,31 +82,20 @@ class EntregaController extends Controller
     public function update(Request $request, Entrega $entrega)
     {
         $request->validate([
-        'id_equipo'=>'required|integer',
-        'id_usuario'=>'required|integer',
-        'observacion' => $request->input('observacion'),
+            'id_equipo' => 'required|integer',
+            'id_usuario' => 'required|integer',
+            'observaciones' => 'required',
         ]);
+
         $entrega->update([
-            'id_equipo'=>'required|integer',
-            'id_usuario'=>'required|integer',
-            'observacion' => $request->input('observacion'),
-            ]);
-        
-            return redirect()->route('entregas.index')->with('exito', 'La entrega se ha actualizado correctamente');
+            'id_equipo' => $request->input('id_equipo'),
+            'id_usuario' => $request->input('id_usuario'),
+            'observaciones' => $request->input('observaciones'),
+        ]);
+
+        return redirect()->route('entregas.index')->with('exito', 'La entrega se ha actualizado correctamente');
     }
 
-
-
-
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    
-
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Entrega $entrega)
     {
         $entrega->delete();

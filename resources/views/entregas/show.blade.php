@@ -1,20 +1,19 @@
 @extends('layouts.app')
 
 @section('titulo')
-    Recepcion-Equipos | Detalles Devoluciones
+    Recepcion-Equipos | Detalles Entregas
 @endsection
 @section('content')
     <div class="container mt-5">
-        <h2>Detalles de la Devolucion</h2>
+        <h2>Detalles de la Entrega</h2>
         <br>
         <div class="card-body">
-            <p><strong>Fecha de la Devolucion:</strong> {{ $devolucion->fecha_devolucion }}</p>
+            <p><strong>Fecha de la Entrega:</strong> {{ $entrega->fecha_entrega }}</p>            
             <p><strong>Usuario:</strong> {{ $usuario->name }}</p>
             <p><strong>Equipo:</strong> {{ $equipo->tipo_equipo.' - '.$equipo->no_serie}}</p>
-            <p><strong>Observaciones:</strong> <br> {{ $devolucion->observaciones }}</p>
-         
+            <p><strong>Observaciones:</strong> <br> {{ $entrega->observaciones }}</p>
             <div class="text-left mt-3">
-                <a href="{{route('devoluciones.index')}}" class="btn btn-warning">Regresar</a>
+                <a href="{{route('entregas.index')}}" class="btn btn-warning">Regresar</a>
             </div>
         </div>
     </div>

@@ -43,7 +43,7 @@
                         <select name="id_usuario" class="form-control" id="id_usuario">
                             
                             @foreach ($usuarios as $usuario)
-                                <option value="{{ $usuario->id }} {{$usuario->id == $entrega->id_usuario ? 'selected' : ''}} "> {{ $usuario->name }}</option>
+                                <option value="{{ $usuario->id }}" {{$usuario->id == $entrega->id_usuario ? 'selected' : ''}}> {{ $usuario->name }}</option>
                             @endforeach
 
                         </select>
