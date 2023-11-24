@@ -9,10 +9,10 @@
         <br>
         <div class="card-body">
             <p><strong>Fecha de la Devolucion:</strong> {{ $devolucion->fecha_devolucion }}</p>
-            <p><strong>Usuario:</strong> {{ $usuario->name }}</p>
+            <p><strong>Usuario del Estudiante:</strong> {{ $usuario->name }}</p>
+            <p><strong>Nombre del Estudiante:</strong> {{ $propietario->nombre_completo }}</p>
             <p><strong>Equipo:</strong> {{ $equipo->tipo_equipo.' - '.$equipo->no_serie}}</p>
-            <p><strong>Observaciones:</strong> <br> {{ $devolucion->observaciones }}</p>
-         
+            <p><strong>Observaciones:</strong> <br> {{ $devolucion->observaciones }}</p>         
             <div class="text-left mt-3">
                 <a href="{{route('devoluciones.index')}}" class="btn btn-warning">Regresar</a>
             </div>

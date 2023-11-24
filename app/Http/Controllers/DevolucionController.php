@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Devolucion;
+use App\Models\Propietario;
 use App\Models\User;
 use App\Models\Equipo;
 use Illuminate\Http\Request;
@@ -25,9 +26,10 @@ class DevolucionController extends Controller
         $devolucion->fecha_devolucion = now(); 
         $devolucion->save();
 
-        /* Actulizacion al campo del equipo para que poddamos entregarlo
+        /* Actulizacion al campo del equipo para que podamos entregarlo
         de nuevo porque ya ha sido devuelto*/
         $devolucion->equipo->entregado = 0;
+        $devolucion->equipo->id_usuario = $request->input('id_usuario');
         $devolucion->equipo->save();
     
         return redirect()->route('devoluciones.create')->with('exito', 'Se ha guardado correctamente la devolucion');
@@ -65,10 +67,11 @@ class DevolucionController extends Controller
     }
 
     public function show(Devolucion $devolucion)
-    {           
+    {                  
         $usuario = User::find($devolucion->id_usuario);
         $equipo = Equipo::find($devolucion->id_equipo);
-        return view('devoluciones.show', compact('usuario', 'equipo', 'devolucion'));
+        $propietario = Propietario::find($usuario->id_propietario); 
+        return view('devoluciones.show', compact('usuario', 'equipo', 'devolucion', 'propietario'));
     }
 
     public function edit(Devolucion $devolucion)

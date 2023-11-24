@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Entrega;
 use App\Models\Equipo;
+use App\Models\Propietario;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -54,6 +55,7 @@ class EntregaController extends Controller
         /* Actulizacion al campo del equipo para que podamos devolverlo
         de porque ya se asigno a un estudiante*/
         $entrega->equipo->entregado = 1;
+        $entrega->equipo->id_usuario = $request->input('id_usuario');
         $entrega->equipo->save();
 
         return redirect()->route('entregas.create')->with('exito', 'Se ha guardado correctamente la entrega');
@@ -66,7 +68,8 @@ class EntregaController extends Controller
     {   
         $usuario = User::find($entrega->id_usuario);
         $equipo = Equipo::find($entrega->id_equipo);
-        return View('entregas.show', compact('entrega', 'usuario', 'equipo'));
+        $propietario = Propietario::find($usuario->id_propietario); 
+        return View('entregas.show', compact('entrega', 'usuario', 'equipo', 'propietario'));
     }
 
     public function edit(Entrega $entrega)
