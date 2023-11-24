@@ -8,7 +8,6 @@
         <h2>Detalles de la Devolucion</h2>
         <br>
         <div class="card-body">
-            <br>
             <p><strong>Fecha de entrega:</strong> {{ $devolucion->fecha_devolucion }}</p>
             <p><strong>Observaciones:</strong> {{ $devolucion->observaciones }}</p>
             <p><strong>Usuario:</strong> {{ $usuario->name }}</p>

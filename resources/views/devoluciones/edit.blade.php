@@ -24,50 +24,41 @@
         <div class="card-body">
             <form action="{{route('devoluciones.update', $devolucion->id)}}" method="POST" enctype="multipart/form-data">
                 @csrf
-                @method('PUT')
-              
+                @method('PUT')                                           
                 <div class="form-group mb-3">
-                    <label for="fecha_entrega" class="mb-2">Fecha de Entrega:</label>
-                    <input type="date" class="form-control" id="fecha_entrega" name="fecha_entrega" required>
+                    <label for="id_equipo" class="form-label">Usuario:</label>
+                    <select name="id_usuario" class="form-control" id="id_usuario">
+
+                        <option value="" selected>Selecciona un Usuario</option>
+                        @foreach ($usuarios as $user)
+                            <option value="{{ $user->id }}"  {{$user->id == $devolucion->id_usuario ? 'selected' : ''}}> {{ $user->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+             
+                <div class="form-group mb-3">
+                    <label for="id_equipo" class="form-label">Equipo:</label>
+                    <select name="id_equipo" class="form-control" id="id_equipo">
+
+                        <option value="" selected>Selecciona un equipo</option>
+                        @foreach ($equipos as $equipo)
+                            <option value="{{ $equipo->id }}"  {{$equipo->id == $devolucion->id_equipo ? 'selected' : ''}}> {{ $equipo->tipo_equipo.' - '.$equipo->no_serie }}</option>
+                        @endforeach
+                    </select>
+
                 </div>
 
                 <div class="form-group mb-3">
                     <label for="observaciones" class="mb-2">Observaciones:</label>
-                    <input type="text" class="form-control" id="observaciones" name="observaciones" required>
+                    <textarea class="form-control" name="observaciones" id="observaciones" rows="4" required>{{$devolucion->observaciones}}</textarea>
                 </div>
-
-                
-                    
-                <div class="form-group mb-3">
-                    <label for="correo" class="form-label">Usuario:</label>
-                    <select name="users" class="form-control" id="users">
-                        @foreach ($usuarios as $user)
-                            <option value="{{ $usuarios->id }}"> {{ $usuarios->name }}</option>
-                        @endforeach
-
-                    </select>
-
-
-                </div>
-             
-                <div class="form-group mb-3">
-                    <label for="correo" class="form-label">Equipo:</label>
-                    <select name="users" class="form-control" id="users">
-
-                        <option value="" selected>Selecciona el equipo</option>
-                        @foreach ($equipos as $equipo)
-                            <option value="{{ $equipo->id }}"> {{ $equipo->tipo_equipo }}</option>
-                        @endforeach
-
-                    </select>
-
 
                 <div class="text-left mt-3">
                     <button type="submit" class="btn btn-primary">Actualizar Devolucion</button>
                     <a href="{{route('devoluciones.index')}}" class="btn btn-warning">Regresar</a>
                 </div>
                 
-            </form>
+            </form>                       
         </div>        
     </div>
 @endsection
