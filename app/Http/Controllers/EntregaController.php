@@ -63,7 +63,9 @@ class EntregaController extends Controller
     
     public function edit(Entrega $entrega)
     {
-        return View('entregas.edit',compact('entrega'));
+        $usuarios = User::where('rol', 'Estudiante')->get();
+        $equipos = Equipo::all();
+        return View('entregas.edit',compact('usuarios', 'equipos' , 'entrega'));
     }
 
     /**
@@ -72,13 +74,22 @@ class EntregaController extends Controller
     public function update(Request $request, Entrega $entrega)
     {
         $request->validate([
+        'id_equipo'=>'required|integer',
+        'id_usuario'=>'required|integer',
         'observacion' => $request->input('observacion'),
         ]);
+        $entrega->update([
+            'id_equipo'=>'required|integer',
+            'id_usuario'=>'required|integer',
+            'observacion' => $request->input('observacion'),
+            ]);
+        
+            return redirect()->route('entregas.index')->with('exito', 'La entrega se ha actualizado correctamente');
     }
 
 
-    
-    
+
+
 
     /**
      * Show the form for editing the specified resource.
