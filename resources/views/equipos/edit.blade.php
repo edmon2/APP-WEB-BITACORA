@@ -40,6 +40,12 @@
                 <div class="form-group mb-3">
                     <label for="id_usuario" class="form-label">Usuario Propietario:</label>
                     <select name="id_usuario" class="form-control" id="id_usuario">
+                        <!-- opcion por defecto, el unico admin que se puede mostrar 
+                            es el que se asigno por defecto al crear -->
+                        @if ($currentUser->rol == 'Admin')
+                            <option value="{{ $currentUser->id }}" selected> {{ $currentUser->name }}</option>
+                        @endif
+                        
                         @foreach ($usuarios as $usuario)
                             @if ($equipo->id_usuario == $usuario->id)
                                 <option value="{{ $usuario->id }}" selected> {{ $usuario->name }}</option>

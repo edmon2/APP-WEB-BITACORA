@@ -17,7 +17,7 @@ class EntregaController extends Controller
     {
         $noFilas = $request->input('rowsNumber', 5);
 
-        $entregas = Entrega::paginate($noFilas);
+        $entregas = Entrega::with('usuario', 'equipo')->paginate($noFilas);
         return View('entregas.index', compact('entregas', 'noFilas'));
     }
 

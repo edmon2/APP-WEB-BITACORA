@@ -30,25 +30,27 @@
             <thead>
                 <tr>
                     <th>Fecha de Entrega</th>
-                    <th>Observaciones</th>
-                    <th>Ver Detalles</th>
-                    <th>Editar</th>
-                    <th>Eliminar</th>
+                    <th>Equipo</th>
+                    <th>Usuario</th>
+                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($entregas as $entrega)
                     <tr>
                         <td>{{ $entrega->fecha_entrega }}</td>
-                        <td>{{ $entrega->observaciones }}</td>
+                        <td>{{ $entrega->equipo->tipo_equipo }}</td>
+                        <td>{{ $entrega->usuario->name}}</td>
 
                         <!-- botones -->
-                        <td><a href="{{ route('entregas.show', $entrega->id) }}" class="btn btn-info">Ver Detalles</a></td>
-                        <td><a href="{{ route('entregas.edit', $entrega->id) }}" class="btn btn-warning">Editar</a></td>
-                        <td><button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                        <td style="width: 300px">
+                            <a href="{{ route('entregas.show', $entrega->id) }}" class="btn btn-info">Ver Detalles</a>
+                            <a href="{{ route('entregas.edit', $entrega->id) }}" class="btn btn-warning">Editar</a>
+                            <button type="button" class="btn btn-danger" data-bs-toggle="modal"
                                 data-bs-target="#exampleModal{{ $indice }}">
                                 Eliminar
-                            </button></td>
+                            </button>
+                        </td>                       
 
                         <!-- Modal -->
                         <div class="modal fade" id="exampleModal{{ $indice }}" tabindex="-1"

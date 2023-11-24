@@ -20,5 +20,16 @@ class Entrega extends Model
         'observaciones',
     ];
 
+    // Relación con Usuario
+    public function usuario()
+    {
+        return $this->belongsTo(User::class, 'id_usuario');
+    }
+
+    // Relación con Equipo
+    public function equipo()
+    {
+        return $this->belongsTo(Equipo::class, 'id_equipo');
+    }
 
 }

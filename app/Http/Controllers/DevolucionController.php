@@ -34,7 +34,7 @@ class DevolucionController extends Controller
     {
         $noFilas = $request->input('rowsNumber', 5);
 
-        $devoluciones = Devolucion::paginate($noFilas);
+        $devoluciones = Devolucion::with('usuario', 'equipo')->paginate($noFilas);
         return view('devoluciones.index', compact('devoluciones', 'noFilas'));
     }
 

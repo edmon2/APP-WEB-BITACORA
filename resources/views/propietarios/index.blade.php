@@ -32,9 +32,7 @@
                     <th>Identidad</th>
                     <th>Nombre</th>
                     {{-- <th>Fecha de Nacimiento</th> --}}
-                    <th>Ver Detalles</th>
-                    <th>Editar</th>
-                    <th>Eliminar</th>
+                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -44,12 +42,14 @@
                         <td>{{ $propietario->nombre_completo }}</td>
 
                         <!-- botones -->
-                        <td><a href="{{route('propietarios.show', $propietario->id)}}" class="btn btn-info">Ver Detalles</a></td>
-                        <td><a href="{{route('propietarios.edit', $propietario->id)}}" class="btn btn-warning">Editar</a></td>
-                        <td><button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                        <td style="width: 300px">
+                            <a href="{{route('propietarios.show', $propietario->id)}}" class="btn btn-info ml-2 mr-2">Ver Detalles</a>
+                            <a href="{{route('propietarios.edit', $propietario->id)}}" class="btn btn-warning ml-2 mr-2">Editar</a>
+                            <button type="button" class="btn btn-danger ml-2 mr-2" data-bs-toggle="modal"
                                 data-bs-target="#exampleModal{{ $indice }}">
                                 Eliminar
-                            </button></td>
+                            </button>
+                        </td>
 
                         <!-- Modal -->
                         <div class="modal fade" id="exampleModal{{ $indice }}" tabindex="-1"

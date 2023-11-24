@@ -14,7 +14,7 @@
         <br>
         <div class="d-flex justify-content-between align-items-center mb-3">
             <a href="{{ route('devoluciones.create') }}" class="btn btn-primary mb-3">Crear Devolucion</a>
-        
+
             <!-- Opción de escoger las filas a mostrar en la tabla -->
             <form action="{{ route('devoluciones.index') }}" method="GET" class="form-inline">
                 <label for="rowsNumber" class="mr-2">Filas por página:</label>
@@ -30,27 +30,27 @@
             <thead>
                 <tr>
                     <th>Fecha de Devolucion</th>
-                    <th>Observaciones</th>
-                    <th>Ver Detalles</th>
-                    <th>Editar</th>
-                    <th>Eliminar</th>
+                    <th>Equipo</th>
+                    <th>Usuario</th>
+                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($devoluciones as $devolucion)
                     <tr>
-                        <td>{{ $devolucion->fecha_devolucion }}</td>
-                        <td>{{ $devolucion->observaciones }}</td>
+                        <td>{{ $devolucion->fecha_devolucion }}</td>                        
+                        <td>{{ $devolucion->equipo->tipo_equipo }}</td>
+                        <td>{{$devolucion->usuario->name}}</td>
 
                         <!-- botones -->
-                        <td><a href="{{ route('devoluciones.show', $devolucion->id) }}" class="btn btn-info">Ver Detalles</a>
-                        </td>
-                        <td><a href="{{ route('devoluciones.edit', $devolucion->id) }}" class="btn btn-warning">Editar</a>
-                        </td>
-                        <td><button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                        <td style="width: 300px">
+                            <a href="{{ route('devoluciones.show', $devolucion->id) }}" class="btn btn-info">Ver Detalles</a>
+                            <a href="{{ route('devoluciones.edit', $devolucion->id) }}" class="btn btn-warning">Editar</a>
+                            <button type="button" class="btn btn-danger" data-bs-toggle="modal"
                                 data-bs-target="#exampleModal{{ $indice }}">
                                 Eliminar
-                            </button></td>
+                            </button>
+                        </td>
 
                         <!-- Modal -->
                         <div class="modal fade" id="exampleModal{{ $indice }}" tabindex="-1"
@@ -88,6 +88,6 @@
         </table>
         <div>
             {{ $devoluciones->appends(['rowsNumber' => $noFilas])->links() }}
-        </div>  
+        </div>
     </div>
 @endsection

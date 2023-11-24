@@ -57,7 +57,8 @@ class EquipoController extends Controller
     public function edit(Equipo $equipo)
     {
         $usuarios = User::where('rol', 'Estudiante')->get();
-        return view('equipos.edit', compact('equipo','usuarios'));
+        $currentUser = User::find($equipo->id_usuario);
+        return view('equipos.edit', compact('equipo', 'usuarios', 'currentUser'));
     }
     public function update(Request $request, Equipo $equipo)
     {
