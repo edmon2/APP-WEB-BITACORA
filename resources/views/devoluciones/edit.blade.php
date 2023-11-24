@@ -1,4 +1,4 @@
-@extends('layouts.app')PincheOscarDescargueseGit
+@extends('layouts.app')
 
 @section('titulo')
     Recepcion-Equipos | Editar Devolucion

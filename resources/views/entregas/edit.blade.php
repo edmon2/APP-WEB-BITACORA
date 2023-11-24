@@ -57,7 +57,7 @@
                 </div>
 
                 <div class="text-left mt-3">
-                    <button type="submit" class="btn btn-primary">Guardar Entrega</button>
+                    <button type="submit" class="btn btn-primary">Actualizar Entrega</button>
                     <a href="{{route('entregas.index')}}" class="btn btn-warning">Regresar</a>
                 </div>
                 
