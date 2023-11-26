@@ -53,7 +53,7 @@ class UserController extends Controller
     {
         $noFilas = $request->input('rowsNumber', 5);
         
-        $users = User::paginate($noFilas);
+        $users = User::with('propietario')->paginate($noFilas);
         return view('users.index', compact('users','noFilas'));
     }
 
@@ -65,8 +65,7 @@ class UserController extends Controller
 
     public function show(User $user)
     {
-        $propietario = Propietario::find($user->id_propietario);
-        return view('users.show', compact('propietario', 'user'));
+        return view('users.show', compact('user'));
     }
 
     public function destroy(User $user)

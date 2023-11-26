@@ -11,7 +11,7 @@
             <p><strong>Nombre de Usuario:</strong> {{ $user->name }}</p>
             <p><strong>Email:</strong> {{ $user->email }}</p>     
             <p><strong>Rol:</strong> {{ $user->rol }}</p> 
-            <p><strong>Propietario:</strong> {{ $propietario->nombre_completo }}</p>                                
+            <p><strong>Propietario:</strong> {{ $user->propietario->nombre_completo }}</p>                                
             <div class="text-left mt-3">
                 <a href="{{route('users.index')}}" class="btn btn-warning">Regresar</a>
             </div>

@@ -17,4 +17,9 @@ class Equipo extends Model
         'id_usuario',
         'entregado',
     ];
+
+    public function usuario()
+    {
+        return $this->belongsTo(User::class, 'id_usuario');
+    }
 }

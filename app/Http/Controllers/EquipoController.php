@@ -30,36 +30,31 @@ class EquipoController extends Controller
 
     }
 
-    public function returnView()
-    {
-        $usuarios = User::all();
-        return view('equipos',['usuarios'=> $usuarios]);
-    }
-
     public function index(Request $request)
     {       
         $noFilas = $request->input('rowsNumber', 5);
         
-        $equipos = Equipo::paginate($noFilas);
+        $equipos = Equipo::with('usuario.propietario')->paginate($noFilas);
         return view('equipos.index', compact('equipos', 'noFilas'));
     }
+
     public function create()
     {
         $usuarios = User::where('rol', 'Admin')->get();
         return view('equipos.create', compact('usuarios'));
     }
+
     public function show(Equipo $equipo)
     {
-        $usuario = User::find($equipo->id_usuario);
-        $propietario = Propietario::find($usuario->id_propietario);
-        return view('equipos.show', compact('usuario', 'propietario','equipo'));
+        return view('equipos.show', compact('equipo'));
     }
+
     public function edit(Equipo $equipo)
     {
         $usuarios = User::where('rol', 'Estudiante')->get();
-        $currentUser = User::find($equipo->id_usuario);
-        return view('equipos.edit', compact('equipo', 'usuarios', 'currentUser'));
+        return view('equipos.edit', compact('equipo', 'usuarios'));
     }
+
     public function update(Request $request, Equipo $equipo)
     {
         $request->validate([
@@ -79,6 +74,7 @@ class EquipoController extends Controller
 
         return redirect()->route('equipos.index')->with('exito', 'El equipo se ha actualizado correctamente');
     }
+
     public function destroy(Equipo $equipo)
     {
         $equipo->delete();

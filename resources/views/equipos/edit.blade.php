@@ -42,8 +42,8 @@
                     <select name="id_usuario" class="form-control" id="id_usuario">
                         <!-- opcion por defecto, el unico admin que se puede mostrar 
                             es el que se asigno por defecto al crear -->
-                        @if ($currentUser->rol == 'Admin')
-                            <option value="{{ $currentUser->id }}" selected> {{ $currentUser->name }}</option>
+                        @if ($equipo->usuario->rol == 'Admin')
+                            <option value="{{ $equipo->usuario->id }}" selected> {{ $equipo->usuario->name }}</option>
                         @endif
                         
                         @foreach ($usuarios as $usuario)

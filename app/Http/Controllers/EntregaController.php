@@ -19,7 +19,7 @@ class EntregaController extends Controller
     {
         $noFilas = $request->input('rowsNumber', 5);
 
-        $entregas = Entrega::with('usuario', 'equipo')->paginate($noFilas);
+        $entregas = Entrega::with('usuario.propietario', 'equipo')->paginate($noFilas);
         return View('entregas.index', compact('entregas', 'noFilas'));
     }
 
@@ -42,7 +42,6 @@ class EntregaController extends Controller
             'id_equipo' => 'required|integer',
             'id_usuario' => 'required|integer',
             'observaciones' => 'required|string|min:2|max:255',
-
         ]);
 
         $entrega = new Entrega();
@@ -65,11 +64,8 @@ class EntregaController extends Controller
      * Display the specified resource.
      */
     public function show(Entrega $entrega)
-    {   
-        $usuario = User::find($entrega->id_usuario);
-        $equipo = Equipo::find($entrega->id_equipo);
-        $propietario = Propietario::find($usuario->id_propietario); 
-        return View('entregas.show', compact('entrega', 'usuario', 'equipo', 'propietario'));
+    {
+        return View('entregas.show', compact('entrega'));
     }
 
     public function edit(Entrega $entrega)
