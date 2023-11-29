@@ -27,15 +27,6 @@ Route::get('/', function () {
 })->name('home');
 
 
-
-/**
- * Rutas para roles
-*/
-
-Route::get('/formulario_roles', function () {
-    return view('roles');
-});
-
 /**
  * Rutas para devoluciones
  */
@@ -91,18 +82,5 @@ Route::get('/equipos/{equipo}', [EquipoController::class, 'show'])->name('equipo
 Route::get('/equipos/edit/{equipo}', [EquipoController::class, "edit"])->name('equipos.edit');
 Route::put('/equipos/{equipo}', [EquipoController::class, 'update'])->name('equipos.update');
 Route::delete('/equipos/{equipo}', [EquipoController::class, 'destroy'])->name('equipos.destroy');
+Route::post('/equipos', [EquipoController::class, 'store'])->name('equipos.store');
 
-
-Route::get('/formulario_equipos',[EquipoController::class, "returnView"])->name('equipo.returnView');
-Route::post('/equipos_guardar', [EquipoController::class, 'store'])->name('equipos.store');
-
-Route::get('/formulario_entregas',[EntregaController::class, "returnView"])->name('entrega.returnView');
-
-Route::post('/insertar_entregas', [EntregaController::class, "store"])->name('entrega.store');
-
-/**
- * Rutas para equipos
- */
-
- Route::get('/formulario_devoluciones',[DevolucionController::class, "returnView"])->name('devolucion.returnView');
- Route::post('/devoluciones_guardar', [DevolucionController::class, 'store'])->name('devolucion.store');
