@@ -86,11 +86,23 @@ class EntregaController extends Controller
             'observaciones' => 'required',
         ]);
 
+        /* de haber actualizado el equipo el que estaba antes debe 
+        regresar a su estado de no entregado*/
+        $entrega->equipo->entregado = 0;
+        $entrega->equipo->save();
+
         $entrega->update([
             'id_equipo' => $request->input('id_equipo'),
             'id_usuario' => $request->input('id_usuario'),
             'observaciones' => $request->input('observaciones'),
         ]);
+
+        /* el nuevo equipo debera cambiar de estado y de propietario 
+        para que se pueda volver a entregar */
+        $newEquipo = Equipo::find($request->input('id_equipo'));
+        $newEquipo->entregado = 1;
+        $newEquipo->id_usuario = $request->input('id_usuario');
+        $newEquipo->save();
 
         return redirect()->route('entregas.index')->with('exito', 'La entrega se ha actualizado correctamente');
     }

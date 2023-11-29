@@ -34,15 +34,17 @@
                             value="{{ $user->email }}">
                     </div>
 
+                    <!-- Input especial para los propietarios -->
                     <div class="form-group mb-3">
-                        <label for="correo" class="form-label">Propietario:</label>
-                        <select name="propietario" class="form-control" id="propietario">
-                            @foreach ($propietarios as $Propietario)
-                                <option value="{{ $Propietario->id }}"
-                                    {{ $Propietario->id == $user->id_propietario ? 'selected' : '' }}>
-                                    {{ $Propietario->nombre_completo }}</option>
-                            @endforeach
-                        </select>
+                        <label for="autocompleteInput" class="form-label">Propietario:</label>
+                        <input type="text" id="autocompleteInput" class="form-control" placeholder="Buscar propietario"
+                            autocomplete="off" value="{{$user->propietario->nombre_completo}}">
+                        <input type="hidden" name="propietario" id="selectedPropietarioId" value="{{$user->propietario->id}}">
+
+                        <!-- Lista de propietarios oculta -->
+                        <div style="z-index: 15; position: absolute;">
+                            <ul id="propietarioList" class="list-group" style="display: none; cursor: pointer;"></ul>
+                        </div>
                     </div>
 
                     <div class="form-group mb-3">
@@ -62,4 +64,68 @@
             </form>
         </div>
     </div>
+
+    <script>
+        /* Lista de datos que se usarán para los scripts de autocompletado */
+        const propietarios = {!! json_encode($propietarios) !!};
+    </script>
+
+    <!-- Script para autocompletar los propietarios -->
+    <script>
+        // Elementos del DOM
+        const propietarioInput = document.getElementById('autocompleteInput');
+        const selectedPropietarioIdInput = document.getElementById('selectedPropietarioId');
+        const propietarioList = document.getElementById('propietarioList');
+
+        // Escucha el evento de entrada en el campo de texto
+        propietarioInput.addEventListener('input', function () {
+            selectedPropietarioIdInput.value = "";
+            const query = propietarioInput.value.toLowerCase();
+
+            // Filtra los propietarios que coinciden con la consulta
+            const filteredPropietarios = propietarios.filter(propietario => propietario.nombre_completo.toLowerCase().includes(query));
+
+            // Muestra la lista de propietarios
+            displayPropietarioList(filteredPropietarios);
+        });
+
+        // Muestra la lista de propietarios
+        function displayPropietarioList(propietarios) {
+            // Limpia la lista existente
+            propietarioList.innerHTML = '';
+
+            // Muestra la lista de propietarios filtrados
+            propietarios.forEach(propietario => {
+                const listItem = document.createElement('li');
+                listItem.className = 'list-group-item';
+                listItem.textContent = propietario.nombre_completo;
+                listItem.addEventListener('click', function () {
+                    // Cuando se hace clic en un propietario, establece la ID en el campo oculto y el valor en el campo de texto
+                    selectedPropietarioIdInput.value = propietario.id;
+                    propietarioInput.value = propietario.nombre_completo;
+                    // Oculta la lista
+                    propietarioList.style.display = 'none';
+                });
+                propietarioList.appendChild(listItem);
+            });
+
+            // Muestra la lista si hay propietarios filtrados, de lo contrario, la oculta
+            propietarioList.style.display = propietarios.length > 0 ? 'block' : 'none';
+        }
+
+        // Cierra la lista cuando se hace clic fuera del campo de texto y la lista
+        document.addEventListener('click', function (event) {
+            if (!event.target.closest('#autocompleteInput') && !event.target.closest('#propietarioList')) {
+                propietarioList.style.display = 'none';
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            propietarioInput.addEventListener('keyup', function(event) {
+                if (event.key === 'Escape') {
+                    propietarioList.style.display = 'none';
+                }
+            });
+        });
+    </script>
 @endsection

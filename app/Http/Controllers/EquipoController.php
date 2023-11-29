@@ -31,9 +31,9 @@ class EquipoController extends Controller
     }
 
     public function index(Request $request)
-    {       
+    {
         $noFilas = $request->input('rowsNumber', 5);
-        
+
         $equipos = Equipo::with('usuario.propietario')->paginate($noFilas);
         return view('equipos.index', compact('equipos', 'noFilas'));
     }
@@ -52,6 +52,12 @@ class EquipoController extends Controller
     public function edit(Equipo $equipo)
     {
         $usuarios = User::where('rol', 'Estudiante')->get();
+
+        // Verificar si el usuario actual es un administrador y agregarlo al inicio
+        if ($equipo->usuario->rol == 'Admin') {
+            $usuarios->prepend($equipo->usuario);
+        }
+        
         return view('equipos.edit', compact('equipo', 'usuarios'));
     }
 

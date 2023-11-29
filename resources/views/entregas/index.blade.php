@@ -39,7 +39,7 @@
                 @foreach ($entregas as $entrega)
                     <tr>
                         <td>{{ $entrega->fecha_entrega }}</td>
-                        <td>{{ $entrega->equipo->tipo_equipo . '-' . $entrega->equipo->no_serie }}</td>
+                        <td>{{ $entrega->equipo->tipo_equipo . ' - ' . $entrega->equipo->no_serie }}</td>
                         <td>{{ $entrega->usuario->name}}</td>
 
                         <!-- botones -->
