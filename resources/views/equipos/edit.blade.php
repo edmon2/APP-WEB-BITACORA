@@ -8,17 +8,19 @@
         <h2>Editar Equipo</h2>
         <br>
         @if (session('exito'))
-            <div class="alert alert-success">
+            <div class="alert alert-success alert-dismissible fade show mb-4">
                 {{ session('exito') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
             </div>
         @endif
         @if ($errors->any())
-            <div class="alert alert-danger">
+            <div class="alert alert-danger alert-dismissible fade show mb-4" role="alert">
                 <ul>
                     @foreach ($errors->all() as $error)
                         <li>{{ $error }}</li>
                     @endforeach
                 </ul>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
             </div>
         @endif
         <div class="card-body">
@@ -41,15 +43,15 @@
                 <div class="form-group mb-3">
                     <label for="autocompleteInput" class="form-label">Usuario Propietario:</label>
                     <input type="text" id="autocompleteInput" class="form-control" placeholder="Buscar usuario"
-                        autocomplete="off" value="{{$equipo->usuario->name}}">
-                    <input type="hidden" name="id_usuario" id="selectedUserId" value="{{$equipo->id_usuario}}">
+                        autocomplete="off" value="{{ $equipo->usuario->name }}">
+                    <input type="hidden" name="id_usuario" id="selectedUserId" value="{{ $equipo->id_usuario }}">
 
                     <!-- Lista de usuarios oculta -->
                     <div style="z-index: 15; position: absolute;">
                         <ul id="userList" class="list-group" style="display: none; cursor: pointer;"></ul>
-                    </div>                 
-                </div>               
-                
+                    </div>
+                </div>
+
 
                 <div class="form-group mb-3">
                     <label for="estado" class="form-label">Estado:</label>
@@ -70,8 +72,8 @@
     </div>
 
     <script>
-        /*listas de datos que se usaran para los scripts de autocompletado*/        
+        /*listas de datos que se usaran para los scripts de autocompletado*/
         const users = {!! json_encode($usuarios) !!};
         {!! Vite::content('resources/js/autocompleteUsers.js') !!}
-    </script>  
+    </script>
 @endsection

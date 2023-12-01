@@ -8,17 +8,19 @@
         <h2>Crear Propietario</h2>
         <br>
         @if (session('exito'))
-            <div class="alert alert-success">
-                {{session('exito')}}
+            <div class="alert alert-success alert-dismissible fade show mb-4">
+                {{ session('exito') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
             </div>
         @endif
         @if ($errors->any())
-            <div class="alert alert-danger">
+            <div class="alert alert-danger alert-dismissible fade show mb-4" role="alert">
                 <ul>
                     @foreach ($errors->all() as $error)
                         <li>{{ $error }}</li>
                     @endforeach
                 </ul>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
             </div>
         @endif
         <div class="card-body">

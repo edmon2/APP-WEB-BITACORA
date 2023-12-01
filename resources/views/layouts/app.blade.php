@@ -13,7 +13,7 @@
 <body>
     <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="{{route('home')}}">RecepcionEquipos</a>
+            <a class="navbar-brand" href="{{ route('home') }}">RecepcionEquipos</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02"
                 aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -21,10 +21,10 @@
             <div class="collapse navbar-collapse" id="navbarColor02">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{{route('home')}}">Inicio</a>
+                        <a class="nav-link active" aria-current="page" href="{{ route('home') }}">Inicio</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{route('equipos.index')}}">Equipos</a>
+                        <a class="nav-link" href="{{ route('equipos.index') }}">Equipos</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('propietarios.index') }}">Propietarios</a>
@@ -39,9 +39,31 @@
                         <a class="nav-link" href="{{ route('devoluciones.index') }}">Devoluciones</a>
                     </li>
                 </ul>
-                <div class="d-flex" role="search">
-                    <a class="btn btn-outline-light" href="">Cerrar Sesion</a>
+                <div class="d-flex ">
+                    <ul class="navbar-nav me-auto bg-primary ">
+                        <li class="nav-item dropdown bg-primary">
+                            <span class="nav-link dropdown-toggle text-white" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                {{ Auth::user()->name }}
+                            </span>
+                            <ul class="dropdown-menu bg-primary dropdown-menu-end ">
+                                <li><a class="dropdown-item text-white bg-primary" href="{{route('profile.edit')}}">Perfil</a></li>
+                                <li>
+                                    <hr class="dropdown-divider bg-white">
+                                </li>
+                                <li>
+                                    <form method="POST" action="{{ route('logout') }}">
+                                        @csrf
+                                        <a class="dropdown-item text-white bg-primary"
+                                            onclick="event.preventDefault(); this.closest('form').submit();"
+                                            href="{{ route('logout') }}">Cerrar Sesión</a>
+                                    </form>
+                                </li>
+                            </ul>
+                        </li>                        
+                    </ul>
                 </div>
+
             </div>
         </div>
     </nav>
