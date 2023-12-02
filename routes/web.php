@@ -59,10 +59,7 @@ Route::middleware('auth')->group(function () {
          */
 
         Route::get('/propietarios/create', [PropietarioController::class, "create"])->name('propietarios.create');
-        Route::get('/propietarios/{propietario}', [PropietarioController::class, 'show'])->name('propietarios.show');
         Route::get('/propietarios', [PropietarioController::class, "index"])->name('propietarios.index');
-        Route::get('/propietarios/edit/{propietario}', [PropietarioController::class, "edit"])->name('propietarios.edit');
-        Route::put('/propietarios/{propietario}', [PropietarioController::class, 'update'])->name('propietarios.update');
         Route::post('/propietarios', [PropietarioController::class, "store"])->name('propietario.store');
         Route::delete('/propietarios/{propietario}', [PropietarioController::class, 'destroy'])->name('propietarios.destroy');
 
@@ -96,11 +93,19 @@ Route::middleware('auth')->group(function () {
     });
 
     /**
+     * Todo Usuario puede ver su informacion personal y editarla
+     */
+
+    Route::get('/propietarios/{propietario}', [PropietarioController::class, 'show'])->name('propietarios.show');
+    Route::get('/propietarios/edit/{propietario}', [PropietarioController::class, "edit"])->name('propietarios.edit');
+    Route::put('/propietarios/{propietario}', [PropietarioController::class, 'update'])->name('propietarios.update');
+
+    /**
      * Rutas disponibles para todos los Usuarios
      */
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');   
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
 
     /**
      * Home

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use App\Models\Propietario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -32,7 +33,7 @@ class PropietarioController extends Controller
             'direccion' => 'required',
         ]);
 
-        $imagePath = $request->file('imagen')->store('post_images', 'public');
+        $imagePath = $request->file('imagen')->store('images', 'public');
 
         $propietario = new Propietario();
         $propietario->nombre_completo = $request->input('nombre_completo');
@@ -67,7 +68,7 @@ class PropietarioController extends Controller
 
         if ($request->hasFile('imagen')) {
             Storage::disk('public')->delete($propietario->imagen);
-            $imagePath = $request->file('imagen')->store('post_images', 'public');
+            $imagePath = $request->file('imagen')->store('images', 'public');
         } else {
             $imagePath = $propietario->imagen;
         }
@@ -80,7 +81,12 @@ class PropietarioController extends Controller
             'direccion' => $request->input('direccion'),
         ]);
 
-        return redirect()->route('propietarios.index')->with('exito', 'El propietario se ha actualizado correctamente');
+        if (Auth::user()->isAdmin()){
+            return redirect()->route('propietarios.index')->with('exito', 'El propietario se ha actualizado correctamente');
+        }else{
+            return redirect()->route('propietarios.show', Auth::user()->propietario->id)->with('exito', 'El propietario se ha actualizado correctamente');
+        }
+        
     }
 
     public function destroy(Propietario $propietario)

@@ -5,19 +5,28 @@
 @endsection
 @section('content')
     <div class="container mt-5">
-        <h2>Detalles del Propietario</h2>
-        <br>        
+        @if (Auth::user()->isAdmin())
+            <h2>Detalles del Propietario</h2>
+        @else
+            <h2>Tus datos Personales</h2>
+        @endif
+        <br>
         <div class="card-body">
-            <img src="{{ asset('storage/' . $propietario->imagen)}}" class="img-thumbnail" alt="personal-img" style="max-width: 100%; max-height: 200px;">
+            <img src="{{ asset('storage/' . $propietario->imagen) }}" class="img-thumbnail" alt="personal-img"
+                style="max-width: 100%; max-height: 200px;">
             <br>
             <br>
             <p><strong>Nombre Completo:</strong> {{ $propietario->nombre_completo }}</p>
             <p><strong>Fecha de Nacimiento:</strong> {{ $propietario->fecha_nacimiento }}</p>
-            <p><strong>Número de Identidad:</strong> {{ $propietario->no_identidad }}</p>   
-            <p><strong>Direccion:</strong> <br>{{ $propietario->direccion }}</p>                                
+            <p><strong>Número de Identidad:</strong> {{ $propietario->no_identidad }}</p>
+            <p><strong>Direccion:</strong> <br>{{ $propietario->direccion }}</p>
             <div class="text-left mt-3">
-                <a href="{{route('propietarios.index')}}" class="btn btn-warning">Regresar</a>
+                @if (Auth::user()->isAdmin())
+                    <a href="{{ route('propietarios.index') }}" class="btn btn-warning">Regresar</a>
+                @else
+                    <a href="{{ route('propietarios.edit', $propietario->id) }}" class="btn btn-success ml-2 mr-2">Editar datos Personales</a>
+                @endif
             </div>
-        </div>        
+        </div>
     </div>
 @endsection

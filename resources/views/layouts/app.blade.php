@@ -41,10 +41,10 @@
                         </li>
                     @else
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Mis Equipos</a>
+                            <a class="nav-link" href="#">Equipos</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Mis Datos</a>
+                            <a class="nav-link" href="{{route('propietarios.show', Auth::user()->propietario->id)}}">Datos Personales</a>
                         </li>
                     @endif
                 </ul>
