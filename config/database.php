@@ -43,6 +43,8 @@ return [
             'foreign_key_constraints' => env('DB_FOREIGN_KEYS', true),
         ],
 
+        //Usuario y BD lapedaks_grupo1 para el server
+
         'mysql' => [
             'driver' => 'mysql',
             'url' => env('DATABASE_URL'),

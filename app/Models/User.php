@@ -50,4 +50,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Propietario::class, 'id_propietario');
     }
+
+    //funcion que verificara si el usuario es de tipo Admin
+    public function isAdmin(){
+        return $this->rol === 'Admin';
+    }
 }

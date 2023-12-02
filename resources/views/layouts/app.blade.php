@@ -23,21 +23,30 @@
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="{{ route('home') }}">Inicio</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('equipos.index') }}">Equipos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('propietarios.index') }}">Propietarios</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('users.index') }}">Usuarios</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('entregas.index') }}">Entregas</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('devoluciones.index') }}">Devoluciones</a>
-                    </li>
+                    @if (Auth::user()->isAdmin())
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('equipos.index') }}">Equipos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('propietarios.index') }}">Propietarios</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('users.index') }}">Usuarios</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('entregas.index') }}">Entregas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('devoluciones.index') }}">Devoluciones</a>
+                        </li>
+                    @else
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Mis Equipos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Mis Datos</a>
+                        </li>
+                    @endif
                 </ul>
                 <div class="d-flex ">
                     <ul class="navbar-nav me-auto bg-primary ">
@@ -47,7 +56,8 @@
                                 {{ Auth::user()->name }}
                             </span>
                             <ul class="dropdown-menu bg-primary dropdown-menu-end ">
-                                <li><a class="dropdown-item text-white bg-primary" href="{{route('profile.edit')}}">Perfil</a></li>
+                                <li><a class="dropdown-item text-white bg-primary"
+                                        href="{{ route('profile.edit') }}">Perfil</a></li>
                                 <li>
                                     <hr class="dropdown-divider bg-white">
                                 </li>
@@ -60,7 +70,7 @@
                                     </form>
                                 </li>
                             </ul>
-                        </li>                        
+                        </li>
                     </ul>
                 </div>
 
