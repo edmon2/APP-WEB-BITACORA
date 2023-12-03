@@ -6,6 +6,7 @@ use App\Models\Equipo;
 use App\Models\Propietario;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class EquipoController extends Controller
 {
@@ -85,5 +86,12 @@ class EquipoController extends Controller
     {
         $equipo->delete();
         return redirect()->route('equipos.index')->with('exito', 'El equipo se ha eliminado correctamente');
+    }
+
+    public function misequipos()
+    {
+
+        $equipos = Equipo::where('id_usuario',Auth::user()->id)->get();
+        return view('equipos.misequipos', compact('equipos'));
     }
 }
