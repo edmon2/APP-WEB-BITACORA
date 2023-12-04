@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\RolController;
 use App\Http\Controllers\EntregaController;
 use App\Http\Controllers\PropietarioController;
 use App\Http\Controllers\UserController;
@@ -103,6 +102,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/propietarios/{propietario}', [PropietarioController::class, 'show'])->name('propietarios.show');
     Route::get('/propietarios/edit/{propietario}', [PropietarioController::class, "edit"])->name('propietarios.edit');
     Route::put('/propietarios/{propietario}', [PropietarioController::class, 'update'])->name('propietarios.update');
+    Route::get('/equipos/misequipos', [EquipoController::class, "misequipos"])->name('equipos.misequipos');
 
     /**
      * Rutas disponibles para todos los Usuarios
