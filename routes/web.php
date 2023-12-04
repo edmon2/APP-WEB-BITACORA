@@ -41,7 +41,7 @@ Route::middleware('auth')->group(function () {
         Route::put('/devoluciones/{devolucion}', [DevolucionController::class, 'update'])->name('devoluciones.update');
         Route::post('/devoluciones', [DevolucionController::class, "store"])->name('devoluciones.store');
         Route::delete('/devoluciones/{devolucion}', [DevolucionController::class, 'destroy'])->name('devoluciones.destroy');
-
+        Route::post('/devoluciones/find',[DevolucionController::class, 'find'])->name('devoluciones.find');
         /**
          * Rutas para Usuarios
          */
@@ -53,6 +53,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/users/edit/{user}', [UserController::class, "edit"])->name('users.edit');
         Route::put('/users/{user}', [UserController::class, 'update'])->name('users.update');
         Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
+        Route::post('/users/find',[UserController::class, 'find'])->name('users.find');
 
         /**
          * Rutas para propietarios
@@ -62,6 +63,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/propietarios', [PropietarioController::class, "index"])->name('propietarios.index');
         Route::post('/propietarios', [PropietarioController::class, "store"])->name('propietario.store');
         Route::delete('/propietarios/{propietario}', [PropietarioController::class, 'destroy'])->name('propietarios.destroy');
+        Route::post('/propietarios/find',[PropietarioController::class, 'find'])->name('propietarios.find');
 
         /**
          * Rutas para Entregas
@@ -73,6 +75,7 @@ Route::middleware('auth')->group(function () {
         Route::put('/entregas/{entrega}', [EntregaController::class, 'update'])->name('entregas.update');
         Route::post('/entregas', [EntregaController::class, "store"])->name('entregas.store');
         Route::delete('/entregas/{entrega}', [EntregaController::class, 'destroy'])->name('entregas.destroy');
+        Route::post('/entregas/find',[EntregaController::class, 'find'])->name('entregas.find');
 
         /**
          * Rutas para equipos
@@ -84,6 +87,7 @@ Route::middleware('auth')->group(function () {
         Route::put('/equipos/{equipo}', [EquipoController::class, 'update'])->name('equipos.update');
         Route::delete('/equipos/{equipo}', [EquipoController::class, 'destroy'])->name('equipos.destroy');
         Route::post('/equipos', [EquipoController::class, 'store'])->name('equipos.store');
+        Route::post('/equipos/find',[EquipoController::class, 'find'])->name('equipos.find');
 
         /**
          * Eliminacion del perfil automatica solo pueden hacerlo los admins

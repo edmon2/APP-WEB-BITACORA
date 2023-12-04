@@ -17,7 +17,21 @@ class PropietarioController extends Controller
         $propietarios = Propietario::paginate($noFilas);
         return view('propietarios.index', compact('propietarios', 'noFilas'));
     }
+    public function find(Request $request)
+    {
+        $request->validate([
+            'find' => 'required|string'
+        ]);
 
+        $busqueda = $request->input('find');
+        $noFilas = $request->input('rowsNumber', 5);
+
+        $propietarios = Propietario::
+        where('nombre_completo', 'like', '%' . $busqueda . '%')
+        ->paginate($noFilas);
+
+        return View('propietarios.index', compact('propietarios', 'noFilas','busqueda'));
+    }
     public function create()
     {
         return view('propietarios.create');
@@ -86,7 +100,7 @@ class PropietarioController extends Controller
         }else{
             return redirect()->route('propietarios.show', Auth::user()->propietario->id)->with('exito', 'El propietario se ha actualizado correctamente');
         }
-        
+
     }
 
     public function destroy(Propietario $propietario)

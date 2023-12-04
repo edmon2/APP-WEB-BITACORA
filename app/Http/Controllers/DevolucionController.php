@@ -43,7 +43,7 @@ class DevolucionController extends Controller
             'observaciones' => 'required|string|min:2|max:255',
         ]);
 
-        /* de haber actualizado el equipo el que estaba antes debe 
+        /* de haber actualizado el equipo el que estaba antes debe
         regresar a su estado de entregado*/
         $devolucion->equipo->entregado = 1;
         $devolucion->equipo->save();
@@ -54,7 +54,7 @@ class DevolucionController extends Controller
             'observaciones' => $request->input('observaciones'),
         ]);
 
-        /* el nuevo equipo debera cambiar de estado y de propietario 
+        /* el nuevo equipo debera cambiar de estado y de propietario
         para que se pueda devolver nuevamente*/
         $newEquipo = Equipo::find($request->input('id_equipo'));
         $newEquipo->entregado = 0;
@@ -96,5 +96,21 @@ class DevolucionController extends Controller
     {
         $devolucion->delete();
         return redirect()->route('devoluciones.index')->with('exito', 'La devolucion se ha eliminado correctamente');
+    }
+    public function find(Request $request)
+    {
+        $request->validate([
+            'find' => 'required|string'
+        ]);
+
+        $busqueda = $request->input('find');
+        $noFilas = $request->input('rowsNumber', 5);
+
+        $devoluciones = Devolucion::with( 'usuario.propietario','equipo')->
+        whereHas('equipo', function ($query) use ($busqueda) {
+            $query->where('tipo_equipo', 'like', '%' . $busqueda . '%');
+        })->paginate($noFilas);
+
+        return View('devoluciones.index', compact('devoluciones', 'noFilas','busqueda'));
     }
 }
