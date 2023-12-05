@@ -86,7 +86,7 @@ class EntregaController extends Controller
             'observaciones' => 'required',
         ]);
 
-        /* de haber actualizado el equipo el que estaba antes debe 
+        /* de haber actualizado el equipo el que estaba antes debe
         regresar a su estado de no entregado*/
         $entrega->equipo->entregado = 0;
         $entrega->equipo->save();
@@ -97,7 +97,7 @@ class EntregaController extends Controller
             'observaciones' => $request->input('observaciones'),
         ]);
 
-        /* el nuevo equipo debera cambiar de estado y de propietario 
+        /* el nuevo equipo debera cambiar de estado y de propietario
         para que se pueda volver a entregar */
         $newEquipo = Equipo::find($request->input('id_equipo'));
         $newEquipo->entregado = 1;
@@ -111,5 +111,21 @@ class EntregaController extends Controller
     {
         $entrega->delete();
         return redirect()->route('entregas.index')->with('Exito', 'Se ha eliminado');
+    }
+    public function find(Request $request)
+    {
+        $request->validate([
+            'find' => 'required|string'
+        ]);
+
+        $busqueda = $request->input('find');
+        $noFilas = $request->input('rowsNumber', 5);
+
+        $entregas = Entrega::with( 'usuario.propietario','equipo')->
+        whereHas('equipo', function ($query) use ($busqueda) {
+            $query->where('tipo_equipo', 'like', '%' . $busqueda . '%');
+        })->paginate($noFilas);
+
+        return View('entregas.index', compact('entregas', 'noFilas','busqueda'));
     }
 }

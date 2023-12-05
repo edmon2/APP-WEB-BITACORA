@@ -52,7 +52,7 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $noFilas = $request->input('rowsNumber', 5);
-        
+
         $users = User::with('propietario')->paginate($noFilas);
         return view('users.index', compact('users','noFilas'));
     }
@@ -81,7 +81,7 @@ class UserController extends Controller
     }
 
     public function update(Request $request, User $user)
-    {               
+    {
         try {
 
             $request->validate([
@@ -90,7 +90,7 @@ class UserController extends Controller
                 'tipo_usuario' => 'required|string',
                 'propietario' => 'required|integer',
             ]);
-    
+
             $user->update([
                 'name' => $request->input('nombre_usuario'),
                 'email' => $request->input('correo_usuario'),
@@ -117,5 +117,21 @@ class UserController extends Controller
             return redirect()->route('users.edit', compact('user', 'request'))->withErrors($errors);
         }
 
+    }
+    public function find(Request $request)
+    {
+        $request->validate([
+            'find' => 'required|string'
+        ]);
+
+        $busqueda = $request->input('find');
+        $noFilas = $request->input('rowsNumber', 5);
+
+        $users = User::with( 'propietario',)->
+        whereHas('propietario', function ($query) use ($busqueda) {
+            $query->where('nombre_completo', 'like', '%' . $busqueda . '%');
+        })->paginate($noFilas);
+
+        return View('users.index', compact('users', 'noFilas','busqueda'));
     }
 }

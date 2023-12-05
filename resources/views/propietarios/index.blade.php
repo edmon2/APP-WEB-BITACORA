@@ -14,7 +14,28 @@
         <br>
         <div class="d-flex justify-content-between align-items-center mb-3">
             <a href="{{ route('propietarios.create') }}" class="btn btn-primary mb-3">Crear Propietario</a>
-            
+            <form action="{{ route('propietarios.find') }}" method="post" class="form-inline">
+                @csrf
+                <div class="input-group mb-3">
+                    <input type="text" name="find" class="form-control" placeholder="Buscar..." aria-label="Buscar"
+                        aria-describedby="button-addon2">
+                    <button type="submit" class="btn btn-outline-primary" type="button" id="button-addon2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-search" viewBox="0 0 16 16">
+                            <path
+                                d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0">
+                            </path>
+                        </svg>
+                    </button>
+                    <a href="{{ route('propietarios.index') }}" class="btn btn-danger" type="button" id="button-addon2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
+                          </svg>
+                    </a>
+
+
+                </div>
+            </form>
             <!-- Opción de escoger las filas a mostrar en la tabla -->
             <form action="{{ route('propietarios.index') }}" method="GET" class="form-inline">
                 <label for="rowsNumber" class="mr-2">Filas por página:</label>
