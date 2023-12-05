@@ -111,7 +111,12 @@
             </tbody>
         </table>
         <div>
-            {{ $equipos->appends(['rowsNumber' => $noFilas, 'find' => $busqueda])->links() }}
+            @if (isset($busqueda))
+                {{ $equipos->appends(['rowsNumber' => $noFilas, 'find' => $busqueda])->links() }}
+            @else
+                {{ $equipos->appends(['rowsNumber' => $noFilas])->links() }}
+            @endif
+
         </div>
     </div>
 @endsection

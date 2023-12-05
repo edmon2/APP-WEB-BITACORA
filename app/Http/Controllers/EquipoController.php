@@ -36,20 +36,21 @@ class EquipoController extends Controller
         $noFilas = $request->input('rowsNumber', 5);
 
         if ($request->has('find')) {
-            
-            $busqueda = $request->input('find');
 
+            $busqueda = $request->input('find');
             $equipos = Equipo::with('usuario.propietario', )->
                 whereHas('usuario.propietario', function ($query) use ($busqueda) {
                     $query->where('tipo_equipo', 'like', '%' . $busqueda . '%');
                 })->paginate($noFilas);
-        }else{
+            return view('equipos.index', compact('equipos', 'noFilas', 'busqueda'));
+        } else {
             $equipos = Equipo::with('usuario.propietario')->paginate($noFilas);
+            return view('equipos.index', compact('equipos', 'noFilas'));
         }
-        
-        return view('equipos.index', compact('equipos', 'noFilas', 'busqueda'));
+
+
     }
-    
+
     public function create()
     {
         $usuarios = User::where('rol', 'Admin')->get();
