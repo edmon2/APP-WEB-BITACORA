@@ -40,7 +40,7 @@ Route::middleware('auth')->group(function () {
         Route::put('/devoluciones/{devolucion}', [DevolucionController::class, 'update'])->name('devoluciones.update');
         Route::post('/devoluciones', [DevolucionController::class, "store"])->name('devoluciones.store');
         Route::delete('/devoluciones/{devolucion}', [DevolucionController::class, 'destroy'])->name('devoluciones.destroy');
-        Route::post('/devoluciones/find',[DevolucionController::class, 'find'])->name('devoluciones.find');
+        Route::get('/devoluciones/find',[DevolucionController::class, 'find'])->name('devoluciones.find');
         /**
          * Rutas para Usuarios
          */
@@ -52,7 +52,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/users/edit/{user}', [UserController::class, "edit"])->name('users.edit');
         Route::put('/users/{user}', [UserController::class, 'update'])->name('users.update');
         Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
-        Route::post('/users/find',[UserController::class, 'find'])->name('users.find');
+        Route::get('/users/find',[UserController::class, 'find'])->name('users.find');
 
         /**
          * Rutas para propietarios
@@ -63,7 +63,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/propietarios', [PropietarioController::class, "index"])->name('propietarios.index');
         Route::post('/propietarios', [PropietarioController::class, "store"])->name('propietario.store');
         Route::delete('/propietarios/{propietario}', [PropietarioController::class, 'destroy'])->name('propietarios.destroy');
-        Route::post('/propietarios/find',[PropietarioController::class, 'find'])->name('propietarios.find');
+        Route::get('/propietarios/find',[PropietarioController::class, 'find'])->name('propietarios.find');
 
         /**
          * Rutas para Entregas
@@ -75,7 +75,7 @@ Route::middleware('auth')->group(function () {
         Route::put('/entregas/{entrega}', [EntregaController::class, 'update'])->name('entregas.update');
         Route::post('/entregas', [EntregaController::class, "store"])->name('entregas.store');
         Route::delete('/entregas/{entrega}', [EntregaController::class, 'destroy'])->name('entregas.destroy');
-        Route::post('/entregas/find',[EntregaController::class, 'find'])->name('entregas.find');
+        Route::get('/entregas/find',[EntregaController::class, 'find'])->name('entregas.find');
 
         /**
          * Rutas para equipos
@@ -108,7 +108,7 @@ Route::middleware('auth')->group(function () {
 
     /**
      * Rutas disponibles para todos los Usuarios
-     */   
+     */
     Route::put('/propietarios/{propietario}', [PropietarioController::class, 'update'])->name('propietarios.update');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

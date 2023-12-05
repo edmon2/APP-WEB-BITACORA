@@ -12,25 +12,40 @@ class PropietarioController extends Controller
 
     public function index(Request $request)
     {
-        $noFilas = $request->input('rowsNumber', 5);
+        if ($request->has('find')) {
+            $busqueda = $request->input('find');
+            $noFilas = $request->input('rowsNumber', 5);
 
-        $propietarios = Propietario::paginate($noFilas);
-        return view('propietarios.index', compact('propietarios', 'noFilas'));
+            $propietarios = Propietario::
+            where('nombre_completo', 'like', '%' . $busqueda . '%')
+            ->paginate($noFilas);
+
+            return View('propietarios.index', compact('propietarios', 'noFilas','busqueda'));
+        }else{
+            $noFilas = $request->input('rowsNumber', 5);
+
+            $propietarios = Propietario::paginate($noFilas);
+            return view('propietarios.index', compact('propietarios', 'noFilas'));
+        }
     }
     public function find(Request $request)
     {
-        $request->validate([
-            'find' => 'required|string'
-        ]);
+        if ($request->has('find')) {
+            $busqueda = $request->input('find');
+            $noFilas = $request->input('rowsNumber', 5);
 
-        $busqueda = $request->input('find');
-        $noFilas = $request->input('rowsNumber', 5);
+            $propietarios = Propietario::
+            where('nombre_completo', 'like', '%' . $busqueda . '%')
+            ->paginate($noFilas);
 
-        $propietarios = Propietario::
-        where('nombre_completo', 'like', '%' . $busqueda . '%')
-        ->paginate($noFilas);
+            return View('propietarios.index', compact('propietarios', 'noFilas','busqueda'));
+        }else{
+            $noFilas = $request->input('rowsNumber', 5);
 
-        return View('propietarios.index', compact('propietarios', 'noFilas','busqueda'));
+            $propietarios = Propietario::paginate($noFilas);
+            return view('propietarios.index', compact('propietarios', 'noFilas'));
+        }
+
     }
     public function create()
     {

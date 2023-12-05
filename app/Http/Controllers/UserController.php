@@ -51,10 +51,22 @@ class UserController extends Controller
 
     public function index(Request $request)
     {
-        $noFilas = $request->input('rowsNumber', 5);
+        if ($request->has('find')) {
+            $busqueda = $request->input('find');
+            $noFilas = $request->input('rowsNumber', 5);
 
-        $users = User::with('propietario')->paginate($noFilas);
-        return view('users.index', compact('users','noFilas'));
+            $users = User::with( 'propietario',)->
+            whereHas('propietario', function ($query) use ($busqueda) {
+                $query->where('nombre_completo', 'like', '%' . $busqueda . '%');
+            })->paginate($noFilas);
+
+            return View('users.index', compact('users', 'noFilas','busqueda'));
+        }else{
+            $noFilas = $request->input('rowsNumber', 5);
+
+            $users = User::with('propietario')->paginate($noFilas);
+            return view('users.index', compact('users','noFilas'));
+        }
     }
 
     public function create()
@@ -120,18 +132,23 @@ class UserController extends Controller
     }
     public function find(Request $request)
     {
-        $request->validate([
-            'find' => 'required|string'
-        ]);
+        if ($request->has('find')) {
+            $busqueda = $request->input('find');
+            $noFilas = $request->input('rowsNumber', 5);
 
-        $busqueda = $request->input('find');
-        $noFilas = $request->input('rowsNumber', 5);
+            $users = User::with( 'propietario',)->
+            whereHas('propietario', function ($query) use ($busqueda) {
+                $query->where('nombre_completo', 'like', '%' . $busqueda . '%');
+            })->paginate($noFilas);
 
-        $users = User::with( 'propietario',)->
-        whereHas('propietario', function ($query) use ($busqueda) {
-            $query->where('nombre_completo', 'like', '%' . $busqueda . '%');
-        })->paginate($noFilas);
+            return View('users.index', compact('users', 'noFilas','busqueda'));
+        }else{
+            $noFilas = $request->input('rowsNumber', 5);
 
-        return View('users.index', compact('users', 'noFilas','busqueda'));
+            $users = User::with('propietario')->paginate($noFilas);
+            return view('users.index', compact('users','noFilas'));
+        }
+
+
     }
 }

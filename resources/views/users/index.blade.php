@@ -14,7 +14,7 @@
         <br>
         <div class="d-flex justify-content-between align-items-center mb-3">
             <a href="{{ route('users.create') }}" class="btn btn-primary mb-3">Crear Usuario</a>
-            <form action="{{ route('users.find') }}" method="post" class="form-inline">
+            <form action="{{ route('users.index') }}" method="get" class="form-inline">
                 @csrf
                 <div class="input-group mb-3">
                     <input type="text" name="find" class="form-control" placeholder="Buscar..." aria-label="Buscar"
@@ -108,7 +108,11 @@
             </tbody>
         </table>
         <div>
+            @if (isset($busqueda))
+            {{ $users->appends(['rowsNumber' => $noFilas, 'find' => $busqueda])->links() }}
+        @else
             {{ $users->appends(['rowsNumber' => $noFilas])->links() }}
+        @endif
         </div>
     </div>
 @endsection

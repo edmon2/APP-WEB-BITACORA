@@ -14,7 +14,7 @@
         <br>
         <div class="d-flex justify-content-between align-items-center mb-3">
             <a href="{{ route('entregas.create') }}" class="btn btn-primary mb-3">Crear Entrega</a>
-            <form action="{{ route('entregas.find') }}" method="post" class="form-inline">
+            <form action="{{ route('entregas.index') }}" method="get" class="form-inline">
                 @csrf
                 <div class="input-group mb-3">
                     <input type="text" name="find" class="form-control" placeholder="Buscar..." aria-label="Buscar"
@@ -111,7 +111,11 @@
         </table>
         <div>
 
+            @if (isset($busqueda))
+            {{ $entregas->appends(['rowsNumber' => $noFilas, 'find' => $busqueda])->links() }}
+        @else
             {{ $entregas->appends(['rowsNumber' => $noFilas])->links() }}
+        @endif
         </div>
     </div>
 @endsection

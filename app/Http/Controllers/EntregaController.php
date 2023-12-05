@@ -17,10 +17,22 @@ class EntregaController extends Controller
      */
     public function index(Request $request)
     {
-        $noFilas = $request->input('rowsNumber', 5);
+        if ($request->has('find')) {
+            $busqueda = $request->input('find');
+            $noFilas = $request->input('rowsNumber', 5);
 
-        $entregas = Entrega::with('usuario.propietario', 'equipo')->paginate($noFilas);
-        return View('entregas.index', compact('entregas', 'noFilas'));
+            $entregas = Entrega::with( 'usuario.propietario','equipo')->
+            whereHas('equipo', function ($query) use ($busqueda) {
+                $query->where('tipo_equipo', 'like', '%' . $busqueda . '%');
+            })->paginate($noFilas);
+
+            return View('entregas.index', compact('entregas', 'noFilas','busqueda'));
+        }else{
+            $noFilas = $request->input('rowsNumber', 5);
+
+            $entregas = Entrega::with('usuario.propietario', 'equipo')->paginate($noFilas);
+            return View('entregas.index', compact('entregas', 'noFilas'));
+        }
     }
 
     /**
@@ -114,18 +126,23 @@ class EntregaController extends Controller
     }
     public function find(Request $request)
     {
-        $request->validate([
-            'find' => 'required|string'
-        ]);
+        if ($request->has('find')) {
+            $busqueda = $request->input('find');
+            $noFilas = $request->input('rowsNumber', 5);
 
-        $busqueda = $request->input('find');
-        $noFilas = $request->input('rowsNumber', 5);
+            $entregas = Entrega::with( 'usuario.propietario','equipo')->
+            whereHas('equipo', function ($query) use ($busqueda) {
+                $query->where('tipo_equipo', 'like', '%' . $busqueda . '%');
+            })->paginate($noFilas);
 
-        $entregas = Entrega::with( 'usuario.propietario','equipo')->
-        whereHas('equipo', function ($query) use ($busqueda) {
-            $query->where('tipo_equipo', 'like', '%' . $busqueda . '%');
-        })->paginate($noFilas);
+            return View('entregas.index', compact('entregas', 'noFilas','busqueda'));
+        }else{
+            $noFilas = $request->input('rowsNumber', 5);
 
-        return View('entregas.index', compact('entregas', 'noFilas','busqueda'));
+            $entregas = Entrega::with('usuario.propietario', 'equipo')->paginate($noFilas);
+            return View('entregas.index', compact('entregas', 'noFilas'));
+        }
+
+
     }
 }
