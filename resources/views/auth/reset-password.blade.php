@@ -3,6 +3,9 @@
         <form method="POST" action="{{ route('password.store') }}">
             @csrf
 
+            <body>
+                
+            
             <div class="mb-4 text-muted text-sm">
                 ¡Ya falta poco!, proporciona una nueva contraseña que cumpla con las caracteristicas minimas de
                 seguridad y habremos terminado.
@@ -43,9 +46,10 @@
             </div>
 
             <div class="d-flex justify-content-end">
-                <button type="submit" class="btn btn-primary">{{ __('Reestablecer Contraseña') }}</button>
+                <button type="submit" id="submit">{{ __('Reestablecer Contraseña') }}</button>
             </div>
         </form>
     </div>
     </div>
+</body>
 </x-guest-layout>

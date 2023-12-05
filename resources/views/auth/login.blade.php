@@ -9,7 +9,12 @@
     <title>Recepcion Equipos | Login</title>
 </head>
 
-<body class="bg-light d-flex align-items-center justify-content-center" style="height: 100vh;">
+<style>
+    {!! Vite::content('resources/css/login.css') !!}
+</style>
+
+<body class="bg-light d-flex align-items-center justify-content-center">
+  
     <div class="card p-4 mx-auto my-4" style="max-width: 500px;">
         <div class="container">
             <!-- Session Status -->
@@ -58,11 +63,11 @@
                 <div class="d-flex justify-content-end">
                     @if (Route::has('password.request'))
                         <a href="{{ route('password.request') }}" class="text-muted me-3">
-                            {{ __('Has olvidado tu contraseña?') }}
+                            {{ __('¿Has olvidado tu contraseña?') }}
                         </a>
                     @endif
 
-                    <button type="submit" class="btn btn-primary">{{ __('Iniciar Sesion') }}</button>
+                    <button type="submit" id="submit" >{{ __('Iniciar Sesion') }}</button>
                 </div>
             </form>
         </div>
