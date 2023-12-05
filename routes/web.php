@@ -87,7 +87,7 @@ Route::middleware('auth')->group(function () {
         Route::put('/equipos/{equipo}', [EquipoController::class, 'update'])->name('equipos.update');
         Route::delete('/equipos/{equipo}', [EquipoController::class, 'destroy'])->name('equipos.destroy');
         Route::post('/equipos', [EquipoController::class, 'store'])->name('equipos.store');
-        Route::post('/equipos/find',[EquipoController::class, 'find'])->name('equipos.find');
+        Route::get('/equipos/find',[EquipoController::class, 'find'])->name('equipos.find');
 
         /**
          * Eliminacion del perfil automatica solo pueden hacerlo los admins

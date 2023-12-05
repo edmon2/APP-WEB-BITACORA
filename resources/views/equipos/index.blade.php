@@ -16,7 +16,7 @@
         <br>
         <div class="d-flex justify-content-between align-items-center mb-3">
             <a href="{{ route('equipos.create') }}" class="btn btn-primary mb-3">Crear Equipos</a>
-            <form action="{{ route('equipos.find') }}" method="post" class="form-inline">
+            <form action="{{ route('equipos.index') }}" method="get" class="form-inline">
                 @csrf
                 <div class="input-group mb-3">
                     <input type="text" name="find" class="form-control" placeholder="Buscar..." aria-label="Buscar"
@@ -30,9 +30,11 @@
                         </svg>
                     </button>
                     <a href="{{ route('equipos.index') }}" class="btn btn-danger" type="button" id="button-addon2">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
-                            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
-                          </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-x" viewBox="0 0 16 16">
+                            <path
+                                d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
+                        </svg>
                     </a>
 
 
@@ -67,7 +69,8 @@
 
                         <!-- botones -->
                         <td style="width: 300px">
-                            <a href="{{ route('equipos.show', $equipo->id) }}" class="btn btn-info ml-2 mr-2">Ver Detalles</a>
+                            <a href="{{ route('equipos.show', $equipo->id) }}" class="btn btn-info ml-2 mr-2">Ver
+                                Detalles</a>
                             <a href="{{ route('equipos.edit', $equipo->id) }}" class="btn btn-warning ml-2 mr-2">Editar</a>
                             <button type="button" class="btn btn-danger ml-2 mr-2" data-bs-toggle="modal"
                                 data-bs-target="#exampleModal{{ $indice }}">
@@ -110,7 +113,12 @@
             </tbody>
         </table>
         <div>
-            {{ $equipos->appends(['rowsNumber' => $noFilas])->links() }}
+            @if (isset($busqueda))
+                {{ $equipos->appends(['rowsNumber' => $noFilas, 'find' => $busqueda])->links() }}
+            @else
+                {{ $equipos->appends(['rowsNumber' => $noFilas])->links() }}
+            @endif
+
         </div>
     </div>
 @endsection
