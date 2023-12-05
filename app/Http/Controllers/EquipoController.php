@@ -48,7 +48,7 @@ class EquipoController extends Controller
     public function show(Equipo $equipo)
     {
         return view('equipos.show', compact('equipo'));
-    }
+    }    
 
     public function edit(Equipo $equipo)
     {
@@ -90,8 +90,7 @@ class EquipoController extends Controller
 
     public function misequipos()
     {
-
-        $equipos = Equipo::where('id_usuario',Auth::user()->id)->get();
+        $equipos = Equipo::where('id_usuario', Auth::user()->id)->where('entregado', '1')->get();
         return view('equipos.misequipos', compact('equipos'));
     }
 }

@@ -56,7 +56,8 @@ Route::middleware('auth')->group(function () {
         /**
          * Rutas para propietarios
          */
-
+        Route::get('/propietarios/edit/{propietario}', [PropietarioController::class, "edit"])->name('propietarios.edit');
+        Route::get('/propietarios/{propietario}', [PropietarioController::class, 'show'])->name('propietarios.show');
         Route::get('/propietarios/create', [PropietarioController::class, "create"])->name('propietarios.create');
         Route::get('/propietarios', [PropietarioController::class, "index"])->name('propietarios.index');
         Route::post('/propietarios', [PropietarioController::class, "store"])->name('propietario.store');
@@ -92,18 +93,19 @@ Route::middleware('auth')->group(function () {
     });
 
     /**
-     * Todo Usuario puede ver su informacion personal y editarla
+     * Rutas propias de una Estudiante
      */
 
-    Route::get('/propietarios/{propietario}', [PropietarioController::class, 'show'])->name('propietarios.show');
-    Route::get('/propietarios/edit/{propietario}', [PropietarioController::class, "edit"])->name('propietarios.edit');
-    Route::put('/propietarios/{propietario}', [PropietarioController::class, 'update'])->name('propietarios.update');
-    Route::get('/equipos/misequipos', [EquipoController::class, "misequipos"])->name('equipos.misequipos');
+    Route::middleware('student')->group(function () {
+        Route::get('/misequipos', [EquipoController::class, "misequipos"])->name('equipos.misequipos');
+        Route::get('/datospersonales', [PropietarioController::class, 'datospersonales'])->name('datospersonales');
+        Route::get('/datospersonales/edit', [PropietarioController::class, "datospersonales_edit"])->name('datospersonales.edit');
+    });
 
     /**
      * Rutas disponibles para todos los Usuarios
-     */
-
+     */   
+    Route::put('/propietarios/{propietario}', [PropietarioController::class, 'update'])->name('propietarios.update');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
 
@@ -114,6 +116,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/', function () {
         return view('home');
     })->name('home');
+
+
 
 });
 

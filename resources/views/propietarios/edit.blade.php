@@ -60,7 +60,7 @@
                     <button type="submit" class="btn btn-primary">Actualizar Propietario</button>
                     <a @if (Auth::user()->isAdmin()) href="{{ route('propietarios.index') }}"
                     @else
-                    href="{{ route('propietarios.show', Auth::user()->propietario->id) }}" @endif
+                    href="{{ route('datospersonales', Auth::user()->propietario->id) }}" @endif
                         class="btn btn-warning">Regresar</a>
                 </div>
 

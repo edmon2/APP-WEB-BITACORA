@@ -22,9 +22,9 @@
             <p><strong>Direccion:</strong> <br>{{ $propietario->direccion }}</p>
             <div class="text-left mt-3">
                 @if (Auth::user()->isAdmin())
-                    <a href="{{ route('propietarios.index') }}" class="btn btn-warning">Regresar</a>
+                    <a href="{{ route('propietarios.index') }}" class="btn btn-warning">Regresar</a>    
                 @else
-                    <a href="{{ route('propietarios.edit', $propietario->id) }}" class="btn btn-success ml-2 mr-2">Editar datos Personales</a>
+                    <a href="{{ route('datospersonales.edit') }}" class="btn btn-success ml-2 mr-2">Editar datos Personales</a>
                 @endif
             </div>
         </div>

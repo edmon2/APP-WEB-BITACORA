@@ -51,8 +51,20 @@ class PropietarioController extends Controller
         return view('propietarios.show', compact('propietario'));
     }
 
+    public function datospersonales()
+    {
+        $propietario = Auth::user()->propietario;
+        return view('propietarios.show', compact('propietario'));
+    }
+
     public function edit(Propietario $propietario)
     {
+        return view('propietarios.edit', compact('propietario'));
+    }
+
+    public function datospersonales_edit()
+    {
+        $propietario = Auth::user()->propietario;
         return view('propietarios.edit', compact('propietario'));
     }
 
@@ -81,12 +93,12 @@ class PropietarioController extends Controller
             'direccion' => $request->input('direccion'),
         ]);
 
-        if (Auth::user()->isAdmin()){
+        if (Auth::user()->isAdmin()) {
             return redirect()->route('propietarios.index')->with('exito', 'El propietario se ha actualizado correctamente');
-        }else{
-            return redirect()->route('propietarios.show', Auth::user()->propietario->id)->with('exito', 'El propietario se ha actualizado correctamente');
+        } else {
+            return redirect()->route('datospersonales', Auth::user()->propietario->id)->with('exito', 'El propietario se ha actualizado correctamente');
         }
-        
+
     }
 
     public function destroy(Propietario $propietario)
