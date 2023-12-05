@@ -35,25 +35,21 @@ class EquipoController extends Controller
     {
         $noFilas = $request->input('rowsNumber', 5);
 
-        $equipos = Equipo::with('usuario.propietario')->paginate($noFilas);
-        return view('equipos.index', compact('equipos', 'noFilas'));
+        if ($request->has('find')) {
+            
+            $busqueda = $request->input('find');
+
+            $equipos = Equipo::with('usuario.propietario', )->
+                whereHas('usuario.propietario', function ($query) use ($busqueda) {
+                    $query->where('tipo_equipo', 'like', '%' . $busqueda . '%');
+                })->paginate($noFilas);
+        }else{
+            $equipos = Equipo::with('usuario.propietario')->paginate($noFilas);
+        }
+        
+        return view('equipos.index', compact('equipos', 'noFilas', 'busqueda'));
     }
-    public function find(Request $request)
-    {
-        $request->validate([
-            'find' => 'required|string'
-        ]);
-
-        $busqueda = $request->input('find');
-        $noFilas = $request->input('rowsNumber', 5);
-
-        $equipos = Equipo::with( 'usuario.propietario',)->
-        whereHas('usuario.propietario', function ($query) use ($busqueda) {
-            $query->where('tipo_equipo', 'like', '%' . $busqueda . '%');
-        })->paginate($noFilas);
-
-        return View('equipos.index', compact('equipos', 'noFilas','busqueda'));
-    }
+    
     public function create()
     {
         $usuarios = User::where('rol', 'Admin')->get();
@@ -63,7 +59,7 @@ class EquipoController extends Controller
     public function show(Equipo $equipo)
     {
         return view('equipos.show', compact('equipo'));
-    }    
+    }
 
     public function edit(Equipo $equipo)
     {
