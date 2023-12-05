@@ -9,7 +9,9 @@
     Recepcion-Equipos | Equipos
 @endsection
 @section('content')
-    <div class="container mt-5">
+  
+
+    <div class="container mt-5" style="color: aliceblue">
         <h2>Equipos</h2>
         <br>
         <div class="d-flex justify-content-between align-items-center mb-3">

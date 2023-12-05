@@ -9,7 +9,10 @@
     <title>Recepcion Equipos | Restablecer Contraseña</title>
 </head>
 
-<body class="bg-light d-flex align-items-center justify-content-center" style="height: 100vh;">
+<style>
+    {!! Vite::content('resources/css/login.css') !!}
+</style>
+<body class="bg-light d-flex align-items-center justify-content-center">
     <div class="card p-4 mx-auto my-4" style="max-width: 500px;">
         <div class="container">
             <!-- Forgot Password Text -->
@@ -50,8 +53,7 @@
                     </div>
 
                     <div class="d-flex justify-content-end mt-4">
-                        <button type="submit"
-                            class="btn btn-primary">{{ __('Enviar Enlace de Restablecimiento') }}</button>
+                        <button type="submit" id="submit">{{ __('Enviar Enlace de Restablecimiento') }}</button>
                     </div>
                 </form>
             @endif

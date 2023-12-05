@@ -6,6 +6,8 @@ export default defineConfig({
         laravel({
             input: [
                 'resources/css/app.css',
+                'resources/css/estilo.css',
+                'resources/css/login.css',
                 'resources/js/app.js',
                 'resources/js/autocompletePropietarios.js',
                 'resources/js/autocompleteUsers.js',
