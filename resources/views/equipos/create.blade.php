@@ -28,19 +28,19 @@
                 @csrf
                 <div class="form-group mb-3">
                     <label for="no_serie" class="mb-2">Numero de Serie:</label>
-                    <input type="text" class="form-control" id="no_serie" name="no_serie" required>
+                    <input type="text" class="form-control" id="no_serie" name="no_serie" style="background-color: #E2E3E5" required>
                 </div>
 
                 <div class="form-group mb-3">
                     <label for="tipo_equipo" class="mb-2">Tipo de Equipo:</label>
-                    <input type="text" class="form-control" id="tipo_equipo" name="tipo_equipo" required>
+                    <input type="text" class="form-control" id="tipo_equipo" name="tipo_equipo" style="background-color: #E2E3E5" required>
                 </div>
 
                 <!-- Input especial para los usuarios -->
                 <div class="form-group mb-3">
                     <label for="autocompleteInput" class="form-label">Usuario:</label>
                     <input type="text" id="autocompleteInput" class="form-control"
-                        placeholder="Busca un usuario(por defecto admin)" autocomplete="off">
+                        placeholder="Busca un usuario(por defecto admin)" autocomplete="off" style="background-color: #E2E3E5">
                     <input type="hidden" name="id_usuario" id="selectedUserId">
 
                     <!-- Lista de usuarios oculta -->

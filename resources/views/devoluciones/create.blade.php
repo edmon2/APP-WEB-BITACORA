@@ -31,7 +31,7 @@
                 <div class="form-group mb-3">
                     <label for="autocompleteInput" class="form-label">Usuario:</label>
                     <input type="text" id="autocompleteInput" class="form-control" placeholder="Buscar usuario"
-                        autocomplete="off">
+                        autocomplete="off" style="background-color: #E2E3E5">
                     <input type="hidden" name="id_usuario" id="selectedUserId">
 
                     <!-- Lista de usuarios oculta -->
@@ -45,7 +45,7 @@
                 <div class="form-group mb-3">
                     <label for="autocompleteInputEquipo" class="form-label">Equipo:</label>
                     <input type="text" id="autocompleteInputEquipo" class="form-control" placeholder="Buscar equipo"
-                        autocomplete="off">
+                        autocomplete="off" style="background-color: #E2E3E5">
                     <input type="hidden" name="id_equipo" id="selectedEquipoId">
 
                     <!-- Lista de equipos oculta -->
@@ -56,7 +56,7 @@
 
                 <div class="form-group mb-3">
                     <label for="observaciones" class="mb-2">Observaciones:</label>
-                    <textarea class="form-control" name="observaciones" id="observaciones" rows="4" required></textarea>
+                    <textarea class="form-control" name="observaciones" id="observaciones" rows="4" style="background-color: #E2E3E5" required></textarea>
                 </div>
 
                 <div class="text-left mt-3">

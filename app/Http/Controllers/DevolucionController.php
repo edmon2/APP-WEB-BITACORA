@@ -73,7 +73,7 @@ class DevolucionController extends Controller
 
             $devoluciones = Devolucion::with( 'usuario.propietario','equipo')->
             whereHas('equipo', function ($query) use ($busqueda) {
-                $query->where('tipo_equipo', 'like', '%' . $busqueda . '%');
+                $query->where('no_serie', 'like', '%' . $busqueda . '%');
             })->paginate($noFilas);
 
             return View('devoluciones.index', compact('devoluciones', 'noFilas','busqueda'));

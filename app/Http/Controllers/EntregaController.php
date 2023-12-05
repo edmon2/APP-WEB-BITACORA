@@ -23,7 +23,7 @@ class EntregaController extends Controller
 
             $entregas = Entrega::with( 'usuario.propietario','equipo')->
             whereHas('equipo', function ($query) use ($busqueda) {
-                $query->where('tipo_equipo', 'like', '%' . $busqueda . '%');
+                $query->where('no_serie', 'like', '%' . $busqueda . '%');
             })->paginate($noFilas);
 
             return View('entregas.index', compact('entregas', 'noFilas','busqueda'));

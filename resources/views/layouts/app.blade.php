@@ -55,7 +55,7 @@
                 </ul>
                 <div class="d-flex ">
                     <ul class="navbar-nav me-auto ">
-                        <li class="nav-item dropdown " style="background-color: #1D3557">
+                        <li class="nav-item dropdown " style="background-color: #1D3557; border-radius: 5px">
                             <span class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"
                                 aria-expanded="false">
                                 {{ Auth::user()->name }}

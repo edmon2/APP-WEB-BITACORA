@@ -40,7 +40,7 @@ class EquipoController extends Controller
             $busqueda = $request->input('find');
             $equipos = Equipo::with('usuario.propietario', )->
                 whereHas('usuario.propietario', function ($query) use ($busqueda) {
-                    $query->where('tipo_equipo', 'like', '%' . $busqueda . '%');
+                    $query->where('no_serie', 'like', '%' . $busqueda . '%');
                 })->paginate($noFilas);
             return view('equipos.index', compact('equipos', 'noFilas', 'busqueda'));
         } else {

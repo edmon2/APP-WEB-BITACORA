@@ -10,15 +10,13 @@
 @endsection
 @section('content')
     <div class="container mt-5">
-        <h2>Propietarios</h2>
-        <br>
-        <div class="d-flex justify-content-between align-items-center mb-3">
-            <a href="{{ route('propietarios.create') }}" class="btn btn-primary mb-3">Crear Propietario</a>
-            <form action="{{ route('propietarios.index') }}" method="get" class="form-inline">
+        <div class="d-flex justify-content-between align-items-top">
+            <h2>Propietarios</h2>
+            <form action="{{ route('propietarios.index') }}" method="get" class="form-inline" >
                 @csrf
                 <div class="input-group mb-3">
                     <input type="text" name="find" class="form-control" placeholder="Buscar..." aria-label="Buscar"
-                        aria-describedby="button-addon2">
+                        aria-describedby="button-addon2" style="background-color: #E2E3E5">
                     <button type="submit" class="btn btn-outline-primary" type="button" id="button-addon2">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                             class="bi bi-search" viewBox="0 0 16 16">
@@ -28,18 +26,25 @@
                         </svg>
                     </button>
                     <a href="{{ route('propietarios.index') }}" class="btn btn-danger" type="button" id="button-addon2">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
-                            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
-                          </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-x" viewBox="0 0 16 16">
+                            <path
+                                d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
+                        </svg>
                     </a>
 
 
                 </div>
             </form>
+        </div>
+        <br>
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <a href="{{ route('propietarios.create') }}" class="btn btn-primary mb-3">Crear Propietario</a>
+            
             <!-- Opción de escoger las filas a mostrar en la tabla -->
             <form action="{{ route('propietarios.index') }}" method="GET" class="form-inline">
                 <label for="rowsNumber" class="mr-2">Filas por página:</label>
-                <select name="rowsNumber" id="rowsNumber" class="form-control" onchange="this.form.submit()">
+                <select name="rowsNumber" id="rowsNumber" class="form-control" onchange="this.form.submit()" style="background-color: #E2E3E5">
                     @foreach ($listaNoFilas as $option)
                         <option value="{{ $option }}" {{ $noFilas == $option ? 'selected' : '' }}>
                             {{ $option }}</option>
@@ -47,7 +52,7 @@
                 </select>
             </form>
         </div>
-            <table class="table">
+        <table class="table table-secondary">
             <thead>
                 <tr>
                     <th>Identidad</th>
@@ -64,8 +69,10 @@
 
                         <!-- botones -->
                         <td style="width: 300px">
-                            <a href="{{route('propietarios.show', $propietario->id)}}" class="btn btn-info ml-2 mr-2">Ver Detalles</a>
-                            <a href="{{route('propietarios.edit', $propietario->id)}}" class="btn btn-warning ml-2 mr-2">Editar</a>
+                            <a href="{{ route('propietarios.show', $propietario->id) }}" class="btn btn-info ml-2 mr-2">Ver
+                                Detalles</a>
+                            <a href="{{ route('propietarios.edit', $propietario->id) }}"
+                                class="btn btn-warning ml-2 mr-2">Editar</a>
                             <button type="button" class="btn btn-danger ml-2 mr-2" data-bs-toggle="modal"
                                 data-bs-target="#exampleModal{{ $indice }}">
                                 Eliminar
@@ -86,7 +93,8 @@
                                         ¿Desea eliminar este propietario?
                                     </div>
                                     <div class="modal-footer">
-                                        <form action="{{route('propietarios.destroy', $propietario->id)}}" method="post">
+                                        <form action="{{ route('propietarios.destroy', $propietario->id) }}"
+                                            method="post">
                                             @method('DELETE')
                                             @csrf
                                             <button type="button" class="btn btn-secondary"
@@ -108,10 +116,10 @@
         </table>
         <div>
             @if (isset($busqueda))
-            {{ $propietarios->appends(['rowsNumber' => $noFilas, 'find' => $busqueda])->links() }}
-        @else
-            {{ $propietarios->appends(['rowsNumber' => $noFilas])->links() }}
-        @endif
+                {{ $propietarios->appends(['rowsNumber' => $noFilas, 'find' => $busqueda])->links() }}
+            @else
+                {{ $propietarios->appends(['rowsNumber' => $noFilas])->links() }}
+            @endif
         </div>
     </div>
 @endsection

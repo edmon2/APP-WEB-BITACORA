@@ -31,29 +31,29 @@
                 <div class="form-group mb-3">
                     <label for="nombre_completo" class="mb-2">Nombre Completo:</label>
                     <input type="text" class="form-control" id="nombre_completo" name="nombre_completo"
-                        value="{{ $propietario->nombre_completo }}" required>
+                        value="{{ $propietario->nombre_completo }}" style="background-color: #E2E3E5" required>
                 </div>
 
                 <div class="form-group mb-3">
                     <label for="fecha_nac" class="mb-2">Fecha de Nacimiento:</label>
                     <input type="date" class="form-control" id="fecha_nac" name="fecha_nac"
-                        value="{{ $propietario->fecha_nacimiento }}" required>
+                        value="{{ $propietario->fecha_nacimiento }}" style="background-color: #E2E3E5" required>
                 </div>
 
                 <div class="form-group mb-3">
                     <label for="identidad" class="mb-2">Número de Identidad:</label>
                     <input type="text" class="form-control" id="identidad" name="identidad"
-                        value="{{ $propietario->no_identidad }}" required>
+                        value="{{ $propietario->no_identidad }}" style="background-color: #E2E3E5" required>
                 </div>
 
                 <div class="mb-3">
                     <label for="direccion" class="form-label">Direccion:</label>
-                    <textarea class="form-control" id="direccion" name="direccion" rows="5" required>{{ $propietario->direccion }}</textarea>
+                    <textarea class="form-control" id="direccion" name="direccion" rows="5" style="background-color: #E2E3E5" required>{{ $propietario->direccion }}</textarea>
                 </div>
 
                 <div class="mb-3">
                     <label for="imagen" class="form-label">Imagen (Personal):</label>
-                    <input type="file" class="form-control" id="imagen" name="imagen">
+                    <input type="file" class="form-control" id="imagen" name="imagen" style="background-color: #E2E3E5">
                 </div>
 
                 <div class="text-left mt-3">

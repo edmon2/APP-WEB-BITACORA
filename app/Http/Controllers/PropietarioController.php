@@ -10,6 +10,12 @@ use Illuminate\Support\Facades\Storage;
 class PropietarioController extends Controller
 {
 
+
+    public function create()
+    {
+        return view('propietarios.create');
+    }
+
     public function index(Request $request)
     {
         if ($request->has('find')) {
@@ -27,30 +33,8 @@ class PropietarioController extends Controller
             $propietarios = Propietario::paginate($noFilas);
             return view('propietarios.index', compact('propietarios', 'noFilas'));
         }
-    }
-    public function find(Request $request)
-    {
-        if ($request->has('find')) {
-            $busqueda = $request->input('find');
-            $noFilas = $request->input('rowsNumber', 5);
-
-            $propietarios = Propietario::
-            where('nombre_completo', 'like', '%' . $busqueda . '%')
-            ->paginate($noFilas);
-
-            return View('propietarios.index', compact('propietarios', 'noFilas','busqueda'));
-        }else{
-            $noFilas = $request->input('rowsNumber', 5);
-
-            $propietarios = Propietario::paginate($noFilas);
-            return view('propietarios.index', compact('propietarios', 'noFilas'));
-        }
-
-    }
-    public function create()
-    {
-        return view('propietarios.create');
-    }
+    }  
+    
 
     public function store(Request $request)
     {

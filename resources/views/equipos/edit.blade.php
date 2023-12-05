@@ -30,20 +30,20 @@
                 <div class="form-group mb-3">
                     <label for="no_serie" class="mb-2">Nº Serie:</label>
                     <input type="text" class="form-control" id="no_serie" name="no_serie"
-                        value="{{ $equipo->no_serie }}" required>
+                        value="{{ $equipo->no_serie }}" style="background-color: #E2E3E5" required>
                 </div>
 
                 <div class="form-group mb-3">
                     <label for="tipo_equipo" class="mb-2">Equipo:</label>
                     <input type="text" class="form-control" id="tipo_equipo" name="tipo_equipo"
-                        value="{{ $equipo->tipo_equipo }}" required>
+                        value="{{ $equipo->tipo_equipo }}" style="background-color: #E2E3E5" required>
                 </div>
 
                 <!-- Input especial para los usuarios -->
                 <div class="form-group mb-3">
                     <label for="autocompleteInput" class="form-label">Usuario Propietario:</label>
                     <input type="text" id="autocompleteInput" class="form-control" placeholder="Buscar usuario"
-                        autocomplete="off" value="{{ $equipo->usuario->name }}">
+                        autocomplete="off" value="{{ $equipo->usuario->name }}" style="background-color: #E2E3E5">
                     <input type="hidden" name="id_usuario" id="selectedUserId" value="{{ $equipo->id_usuario }}">
 
                     <!-- Lista de usuarios oculta -->
@@ -55,7 +55,7 @@
 
                 <div class="form-group mb-3">
                     <label for="estado" class="form-label">Estado:</label>
-                    <select name="estado" class="form-control" id="estado">
+                    <select name="estado" class="form-control" id="estado" style="background-color: #E2E3E5">
                         <option value="0" {{ $equipo->entregado == '0' ? 'selected' : '' }}>Sin Asignar</option>
                         <option value="1" {{ $equipo->entregado == '1' ? 'selected' : '' }}>Asignado</option>
                     </select>
