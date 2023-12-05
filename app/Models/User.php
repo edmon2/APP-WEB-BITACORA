@@ -48,7 +48,7 @@ class User extends Authenticatable
 
     public function propietario()
     {
-        return $this->belongsTo(Propietario::class, 'id_propietario');
+        return $this->belongsTo(Propietario::class, 'id_propietario')->withTrashed();
     }
 
     //funcion que verificara si el usuario es de tipo Admin

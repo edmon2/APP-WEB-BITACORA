@@ -20,12 +20,12 @@ class Devolucion extends Model
     // Relación con Usuario
     public function usuario()
     {
-        return $this->belongsTo(User::class, 'id_usuario');
+        return $this->belongsTo(User::class, 'id_usuario')->withTrashed();
     }
 
     // Relación con Equipo
     public function equipo()
     {
-        return $this->belongsTo(Equipo::class, 'id_equipo');
+        return $this->belongsTo(Equipo::class, 'id_equipo')->withTrashed();
     }
 }
