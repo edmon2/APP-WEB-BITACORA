@@ -8,11 +8,13 @@ export default defineConfig({
                 'resources/css/app.css',
                 'resources/css/estilo.css',
                 'resources/css/login.css',
+                'resources/css/loginsano.css',
                 'resources/js/app.js',
                 'resources/js/autocompletePropietarios.js',
                 'resources/js/autocompleteUsers.js',
                 'resources/js/autocompleteEquipos.js',
                 'resources/js/home.js',
+               
             ],
             refresh: true,
         }),

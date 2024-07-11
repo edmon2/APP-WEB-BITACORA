@@ -46,31 +46,21 @@
                     </div>
 
                     
-                    <!-- Input especial para los propietarios -->
-                    <div class="form-group mb-3">
-                        <label for="autocompleteInput" class="form-label">Propietario:</label>
-                        <input type="text" id="autocompleteInput" class="form-control" placeholder="Buscar propietario"
-                            autocomplete="off">
-                        <input type="hidden" name="propietario" id="selectedPropietarioId">
-
-                        <!-- Lista de propietarios oculta -->
-                        <div style="z-index: 15; position: absolute;">
-                            <ul id="propietarioList" class="list-group" style="display: none; cursor: pointer;"></ul>
-                        </div>
-                    </div>
+                 
 
 
                     <div class="form-group mb-3">
                         <label for="tipo_usuario" class="mb-2">Rol del Usuario:</label>
                         <select class="form-control" id="tipo_usuario" name="tipo_usuario">
-                            <option value="Admin">Admin</option>
-                            <option value="Estudiante">Estudiante</option>
+                            <option value="AdminDataCenter">Admin Data Center</option>
+                            <option value="AdminFabrica">Admin Fabrica</option>
+                            <option value="AdminLaboratorio">Admin Laboratorio</option>
                         </select>
                     </div>
 
 
                     <div class="text-left mb-3">
-                        <button type="submit" class="btn btn-primary">Guardar Usuario</button>
+                        <button type="submit" class="btn" style="background-color: #329702; color: #ffffff;">Guardar Usuario</button>
                         <a href="{{route('users.index')}}" class="btn btn-warning">Regresar</a>
                     </div>
                 </div>
@@ -80,7 +70,7 @@
 
     <script>
         /* Lista de datos que se usarán para los scripts de autocompletado */
-        const propietarios = {!! json_encode($propietarios) !!};        
+               
         {!! Vite::content('resources/js/autocompletePropietarios.js') !!}
     </script>
 @endsection

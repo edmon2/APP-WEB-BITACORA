@@ -52,7 +52,7 @@
                     </div>
 
                     <div class="flex items-center gap-4">
-                        <button type="submit" class="btn btn-primary">{{ __('Guardar') }}</button>
+                        <button type="submit" class="btn " style="background-color: #329702; color: #ffffff;">{{ __('Guardar') }}</button>
 
                         @if ($errors->any())
                             <div class="alert alert-danger alert-dismissible fade show mt-4" role="alert">

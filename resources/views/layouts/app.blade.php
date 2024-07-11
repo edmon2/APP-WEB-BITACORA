@@ -16,9 +16,10 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg  " data-bs-theme="dark" style="background-color: #E63946">
+
+<nav class="navbar navbar-expand-lg  " data-bs-theme="dark" style="background-color: #ff9d0a ">
         <div class="container-fluid">
-            <a class="navbar-brand" style="color: black" href="{{ route('home') }}">RecepcionEquipos</a>
+            <a class="navbar-brand" style="color: black" href="{{ route('home') }}">Digitalización de Bitácora</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02"
                 aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -28,30 +29,30 @@
                     <li class="nav-item">
                         <a class="nav-link active" style="color: black" aria-current="page" href="{{ route('home') }}">Inicio</a>
                     </li>
-                    @if (Auth::user()->isAdmin())
+                    @if (Auth::user()->isAdminDC())
+                
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('visitantes.index') }}">Visitantes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('users.index') }}">Perfiles</a>
+                    </li>
+                @endif
+                    @if (Auth::user()->isAdminFab())
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('visitantesfab.index') }}">Visitantes</a>
+                    </li>
+                @else
+                    @if (Auth::user()->isAdminlab())
                         <li class="nav-item">
-                            <a class="nav-link"  href="{{ route('equipos.index') }}">Equipos</a>
+                            <a class="nav-link" href="{{ route('visitanteslab.index') }}">Visitantes</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link"  href="{{ route('propietarios.index') }}">Propietarios</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link"  href="{{ route('users.index') }}">Usuarios</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link"  href="{{ route('entregas.index') }}">Entregas</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link"  href="{{ route('devoluciones.index') }}">Devoluciones</a>
-                        </li>
-                    @else
-                        <li class="nav-item">
-                            <a class="nav-link"  href="{{ route('equipos.misequipos') }}">Mis Equipos</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link"  href="{{route('datospersonales', Auth::user()->propietario->id)}}">Datos Personales</a>
-                        </li>
+                      
                     @endif
+                   
+                @endif
+                
+           
                 </ul>
                 <div class="d-flex ">
                     <ul class="navbar-nav me-auto ">
@@ -60,7 +61,7 @@
                                 aria-expanded="false">
                                 {{ Auth::user()->name }}
                             </span>
-                            <ul class="dropdown-menu bg-primary dropdown-menu-end ">
+                            <ul class="dropdown-menu  dropdown-menu-end " style="background-color: #329702">
                                 <li><a class="dropdown-item" style="color:rgb(255, 255, 255)"
                                         href="{{ route('profile.edit') }}">Perfil</a></li>
                                 <li>

@@ -6,15 +6,20 @@
 @extends('layouts.app')
 
 @section('titulo')
-    Registro laboratorio | Perfiles
+  Laboratorio | Visitantes
 @endsection
+
 @section('content')
     <div class="container mt-5">
-        <h2>Perfil de Empleado</h2>
+        <h2>Visitante de Laboratorio</h2>
         <br>
+        <div id="exportAlert" class="alert alert-info alert-dismissible fade show" role="alert" style="display: none;">
+            Se está generando el archivo Excel...
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
         <div class="d-flex justify-content-between align-items-center mb-3">
-            <a href="{{ route('users.create') }}" class="btn mb-3" style="background-color: #329702; color: #ffffff;">Crear Perfil</a>
-            <form action="{{ route('users.find') }}" method="post" class="form-inline">
+            <a href="{{ route('visitanteslab.create') }}" class="btn mb-3" style="background-color: #329702; color: #ffffff;">Registrar Visitante</a>   <a href="{{ route('export') }}" class="btn mb-3 export-button" style="background-color: #ffc400; color: #000000;">Exportar a Excel</a>
+            <form action="{{ route('visitanteslab.find') }}" method="post" class="form-inline">
                 @csrf
                 <div class="input-group mb-3">
                     <input type="text" name="find" class="form-control" placeholder="Buscar..." aria-label="Buscar"
@@ -27,17 +32,15 @@
                             </path>
                         </svg>
                     </button>
-                    <a href="{{ route('users.index') }}" class="btn" style="background-color: #fd0000;  type="button" id="button-addon2">
+                    <a href="{{ route('visitanteslab.index') }}" class="btn " style="background-color: #fd0000; " type="button" id="button-addon2">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
                             <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
                           </svg>
                     </a>
-
-
                 </div>
             </form>
             <!-- Opción de escoger las filas a mostrar en la tabla -->
-            <form action="{{ route('users.index') }}" method="GET" class="form-inline">
+            <form action="{{ route('visitanteslab.index') }}" method="GET" class="form-inline">     
                 <label for="rowsNumber" class="mr-2">Filas por página:</label>
                 <select name="rowsNumber" id="rowsNumber" class="form-control" onchange="this.form.submit()">
                     @foreach ($listaNoFilas as $option)
@@ -50,55 +53,61 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>Nombre de Usuario</th>
-                    <th>Rol</th>
+                   
+                    <th>Nombre</th>
+                    <th>Fecha de Entrada</th>
+                    <th>Motivo de Visita</th>
+                    <th>Departamento</th>
+                    <th>Hora de Salida</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($users as $user)
+                @foreach ($visitanteslab as $visitantelab)
                     <tr>
-                        <td>{{ $user->name }}</td>
-                        <td>{{ $user->rol }}</td>
+                    
+                        <td>{{ $visitantelab->nombre_completo }}</td>
+                        <td>{{ $visitantelab->fecha_entrada }}</td>
+                        <td>{{ $visitantelab->motivo_visita }}</td>
+                        <td>{{ $visitantelab->departamento }}</td>
+                        <td>{{ $visitantelab->hora_salida }}</td>
                    
-
-                        <!-- botones -->
                         <td style="width: 300px">
-                            <a href="{{ route('users.show', $user->id) }}" class="btn ml-2 mr-2" style="background-color: #329702; color: #ffffff;">Ver Detalles</a>
-                            <a href="{{ route('users.edit', $user->id) }}" class="btn btn-warning ml-2 mr-2">Editar</a>
+                            <a href="{{ route('visitanteslab.show', $visitantelab->id) }}"
+                                class="btn ml-2 mr-2" style="background-color: #329702; color: #ffffff;">Ver Detalles</a>
+                            <a href="{{ route('visitanteslab.edit', $visitantelab->id) }}"
+                                class="btn btn-warning ml-2 mr-2">Editar</a>
                             <button type="button" class="btn ml-2 mr-2"  style="background-color: #fd0000; color: #ffffff; " data-bs-toggle="modal"
                                 data-bs-target="#exampleModal{{ $indice }}">
                                 Eliminar
                             </button>
                         </td>
-
                         <!-- Modal -->
                         <div class="modal fade" id="exampleModal{{ $indice }}" tabindex="-1"
                             aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Eliminar Perfil</h1>
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Eliminar Visitante</h1>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        ¿Desea eliminar este usuario?
+                                        ¿Desea eliminar este visitante?
                                     </div>
                                     <div class="modal-footer">
-                                        <form action="{{ route('users.destroy', $user->id) }}" method="post">
+                                        <form action="{{ route('visitantes.destroy', $visitantelab->id) }}" method="post">
                                             @method('DELETE')
                                             @csrf
                                             <button type="button" class="btn btn-secondary"
                                                 data-bs-dismiss="modal">Cerrar</button>
-                                            <button type="submit" class="btn btn-danger">Eliminar</button>
+                                            <button type="submit" class="btn "  style="background-color: #fd0000; color: #ffffff; ">Eliminar</button>
                                         </form>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </tr>
-
                     <!-- Actualizacion del Indice -->
                     @php
                         $indice = $indice + 1;
@@ -107,7 +116,26 @@
             </tbody>
         </table>
         <div>
-            {{ $users->appends(['rowsNumber' => $noFilas])->links() }}
+            {{ $visitanteslab->appends(['rowsNumber' => $noFilas])->links() }}
         </div>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Obtener el botón de exportar
+            var exportButton = document.querySelector('.export-button');
+    
+            // Agregar evento click al botón
+            exportButton.addEventListener('click', function(event) {
+                // Prevenir la acción predeterminada del botón (navegar a la URL)
+                event.preventDefault();
+                
+                // Mostrar la alerta
+                alert('Se está generando el archivo Excel...');
+                
+                // Obtener la URL de la acción del botón y navegar a ella después de mostrar la alerta
+                window.location.href = this.getAttribute('href');
+            });
+        });
+    </script>
+    
 @endsection

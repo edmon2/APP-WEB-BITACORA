@@ -21,9 +21,7 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
-        'password',
-        'id_propietario',
-        'rol',
+        'password',    
     ];
 
     /**
@@ -46,17 +44,15 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function propietario()
-    {
-        return $this->belongsTo(Propietario::class, 'id_propietario');
-    }
 
     //funcion que verificara si el usuario es de tipo Admin
-    public function isAdmin(){
-        return $this->rol === 'Admin';
+    public function isAdminDC(){
+        return $this->rol === 'AdminDataCenter';
     }
-
-    public function isStudent(){
-        return $this->rol === 'Estudiante';
+    public function isAdminFab(){
+        return $this->rol === 'AdminFabrica';
+    }
+    public function isAdminLab(){
+        return $this->rol === 'AdminLaboratorio';
     }
 }

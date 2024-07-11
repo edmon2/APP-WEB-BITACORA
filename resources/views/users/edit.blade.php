@@ -41,30 +41,19 @@
                             value="{{ $user->email }}">
                     </div>
 
-                    <!-- Input especial para los propietarios -->
-                    <div class="form-group mb-3">
-                        <label for="autocompleteInput" class="form-label">Propietario:</label>
-                        <input type="text" id="autocompleteInput" class="form-control" placeholder="Buscar propietario"
-                            autocomplete="off" value="{{$user->propietario->nombre_completo}}">
-                        <input type="hidden" name="propietario" id="selectedPropietarioId" value="{{$user->propietario->id}}">
-
-                        <!-- Lista de propietarios oculta -->
-                        <div style="z-index: 15; position: absolute;">
-                            <ul id="propietarioList" class="list-group" style="display: none; cursor: pointer;"></ul>
-                        </div>
-                    </div>
+             
 
                     <div class="form-group mb-3">
                         <label for="tipo_usuario" class="mb-2">Rol del Usuario:</label>
                         <select class="form-control" id="tipo_usuario" name="tipo_usuario">
-                            <option value="Admin" {{ $user->rol == 'Admin' ? 'selected' : '' }}>Admin</option>
-                            <option value="Estudiante" {{ $user->rol == 'Estudiante' ? 'selected' : '' }}>Estudiante
-                            </option>
+                            <option value="AdminDataCenter" {{ $user->rol == 'AdminDataCenter' ? 'selected' : '' }}>Admin Data Center</option>
+                            <option value="AdminFabrica" {{ $user->rol == 'AdminFabrica' ? 'selected' : '' }}>Admin Fabrica</option>
+                            <option value="AdminLaboratorio" {{ $user->rol == 'AdminLaboratorio' ? 'selected' : '' }}>Admin laboratorio  </option>
                         </select>
                     </div>
 
                     <div class="text-left mb-3">
-                        <button type="submit" class="btn btn-primary">Actualizar Usuario</button>
+                        <button type="submit" class="btn" style="background-color: #329702; color: #ffffff;">Actualizar Usuario</button>
                         <a href="{{ route('users.index') }}" class="btn btn-warning">Regresar</a>
                     </div>
                 </div>
@@ -73,8 +62,7 @@
     </div>
 
     <script>
-        /* Lista de datos que se usarán para los scripts de autocompletado */
-        const propietarios = {!! json_encode($propietarios) !!};        
+         
         {!! Vite::content('resources/js/autocompletePropietarios.js') !!}    
     </script>
     

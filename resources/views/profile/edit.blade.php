@@ -13,9 +13,9 @@
             @include('profile.partials.update-password-form')
         </div>
 
-        <!-- Solo al admin podra eliminar su cuenta el mismo
-            Usuarios de tipo Estudiante no pueden hacerlo -->
-        @if (Auth::user()->isAdmin())
+        <!-- Solo al admin podra eliminar su cuenta el mismo -->
+            
+         @if (Auth::user()->isAdminDC() || Auth::user()->isAdminFab() || Auth::user()->isAdminLab() )
             <div>
                 @include('profile.partials.delete-user-form')
             </div>

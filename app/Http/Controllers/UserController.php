@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-use App\Models\Propietario;
+use App\Models\Visitante;
+
 
 class UserController extends Controller
 {
@@ -17,7 +18,7 @@ class UserController extends Controller
                 'correo_usuario' => 'required|email',
                 'contraseña_usuario' => 'required|min:8|max:50',
                 'tipo_usuario' => 'required|string',
-                'propietario' => 'required|integer',
+             
             ]);
 
             $usuario = new User();
@@ -25,7 +26,6 @@ class UserController extends Controller
             $usuario->email = $request->input('correo_usuario');
             $usuario->password = $request->input('contraseña_usuario');
             $usuario->rol = $request->input('tipo_usuario');
-            $usuario->id_propietario = $request->input('propietario');
             $usuario->save();
 
             return redirect()->route('users.create')->with('exito', 'El usuario se ha guardado correctamente');
@@ -52,15 +52,15 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $noFilas = $request->input('rowsNumber', 5);
-
-        $users = User::with('propietario')->paginate($noFilas);
+     
+        $users = User::paginate($noFilas);
         return view('users.index', compact('users','noFilas'));
     }
 
     public function create()
     {
-        $propietarios = Propietario::all();
-        return view('users.create', compact('propietarios'));
+       
+        return view('users.create');
     }
 
     public function show(User $user)
@@ -76,8 +76,8 @@ class UserController extends Controller
 
     public function edit(User $user)
     {
-        $propietarios = Propietario::all();
-        return view('users.edit', compact('user', 'propietarios'));
+      
+        return view('users.edit', compact('user'));
     }
 
     public function update(Request $request, User $user)
@@ -88,14 +88,14 @@ class UserController extends Controller
                 'nombre_usuario' => 'required|string|min:2',
                 'correo_usuario' => 'required|email',
                 'tipo_usuario' => 'required|string',
-                'propietario' => 'required|integer',
+             
             ]);
 
             $user->update([
                 'name' => $request->input('nombre_usuario'),
                 'email' => $request->input('correo_usuario'),
                 'rol' => $request->input('tipo_usuario'),
-                'id_propietario' => $request->input('propietario'),
+ 
             ]);
 
             return redirect()->route('users.index')->with('exito', 'El usuario se ha correctamente');
@@ -126,11 +126,8 @@ class UserController extends Controller
 
         $busqueda = $request->input('find');
         $noFilas = $request->input('rowsNumber', 5);
-
-        $users = User::with( 'propietario',)->
-        whereHas('propietario', function ($query) use ($busqueda) {
-            $query->where('nombre_completo', 'like', '%' . $busqueda . '%');
-        })->paginate($noFilas);
+       
+        $users = User::where('name', 'like', '%' . $busqueda . '%')->paginate($noFilas);
 
         return View('users.index', compact('users', 'noFilas','busqueda'));
     }

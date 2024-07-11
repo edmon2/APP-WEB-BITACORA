@@ -10,8 +10,34 @@
 </head>
 
 <style>
-    {!! Vite::content('resources/css/login.css') !!}
-</style>
+    body{
+     background: #fceabb;  /* fallback for old browsers */
+ background: -webkit-linear-gradient(to right, #f8b500, #fceabb);  /* Chrome 10-25, Safari 5.1-6 */
+ background: linear-gradient(to right, #f8b500, #fceabb); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+ height: 100vh;
+ 
+ #submit {
+     padding: 10px 20px;
+     color: #0e0d0d;
+     font-size: 16px;
+     text-decoration: none;
+     text-transform: uppercase;
+     overflow: hidden;
+     transition: 0.5s;
+     letter-spacing: 2px;
+     border: 1px solid #030303;;
+     margin: auto;
+  }
+  
+ #submit:hover {
+     background: #329702;
+     color: #fcf8f8;
+     border-radius: 5px;
+     box-shadow: 0 0 5px #ffcc40, 0 0 25px #ffe607, 0 0 50px #ffd000, 0 0 100px #ffe600;
+  }
+ 
+ }
+ </style>
 <body class="bg-light d-flex align-items-center justify-content-center">
     <div class="card p-4 mx-auto my-4" style="max-width: 500px;">
         <div class="container">

@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class AdminMiddleware
+class AdminFabMiddleware
 {
     /**
      * Handle an incoming request.
@@ -14,12 +14,12 @@ class AdminMiddleware
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
     public function handle(Request $request, Closure $next): Response
-    {   
-        if ($request->user() && $request->user()->isAdminDC()) {
+    {
+        if ($request->user() && $request->user()->isAdminFab()) {
             return $next($request);
         }
 
         return redirect()->route('home');
-        
+    
     }
 }

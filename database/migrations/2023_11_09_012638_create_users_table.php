@@ -18,13 +18,9 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('rol');
-            $table->unsignedInteger('id_propietario');
             $table->softDeletes();
             $table->rememberToken();
             $table->timestamps();
-
-            #llaves foraneas
-            $table->foreign('id_propietario')->references('id')->on('propietarios');
         });
     }
 
