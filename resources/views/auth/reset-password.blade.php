@@ -4,7 +4,10 @@
             @csrf
 
             <body>
-                
+
+            <style>
+                {!! Vite::content('resources/css/login.css') !!}
+            </style>
             
             <div class="mb-4 text-muted text-sm">
                 ¡Ya falta poco!, proporciona una nueva contraseña que cumpla con las caracteristicas minimas de

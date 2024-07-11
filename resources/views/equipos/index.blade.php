@@ -6,22 +6,13 @@
 @extends('layouts.app')
 
 @section('titulo')
-    Registro laboratorio | Perfiles
+    Recepcion-Equipos | Equipos
 @endsection
 @section('content')
-    <div class="container mt-5">
-<<<<<<< HEAD
-        <h2>Perfil de Empleado</h2>
-        <br>
-        <div class="d-flex justify-content-between align-items-center mb-3">
-            <a href="{{ route('users.create') }}" class="btn mb-3" style="background-color: #329702; color: #ffffff;">Crear Perfil</a>
-            <form action="{{ route('users.find') }}" method="post" class="form-inline">
-=======
+    <div class="container mt-5" style="color: aliceblue">
         <div class="d-flex justify-content-between align-items-top">
-            <h2>Usuarios</h2>
-
-            <form action="{{ route('users.index') }}" method="get" class="form-inline">
->>>>>>> d2f29c56afedeae808201d395706ea3bb4bb7308
+            <h2>Equipos</h2>
+            <form action="{{ route('equipos.index') }}" method="get" class="form-inline">
                 @csrf
                 <div class="input-group mb-3">
                     <input type="text" name="find" class="form-control" placeholder="Buscar..." aria-label="Buscar"
@@ -34,19 +25,12 @@
                             </path>
                         </svg>
                     </button>
-<<<<<<< HEAD
-                    <a href="{{ route('users.index') }}" class="btn" style="background-color: #fd0000;  type="button" id="button-addon2">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
-                            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
-                          </svg>
-=======
-                    <a href="{{ route('users.index') }}" class="btn btn-danger" type="button" id="button-addon2">
+                    <a href="{{ route('equipos.index') }}" class="btn btn-danger" type="button" id="button-addon2">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                             class="bi bi-x" viewBox="0 0 16 16">
                             <path
                                 d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
                         </svg>
->>>>>>> d2f29c56afedeae808201d395706ea3bb4bb7308
                     </a>
 
 
@@ -55,13 +39,12 @@
         </div>
         <br>
         <div class="d-flex justify-content-between align-items-center mb-3">
-            <a href="{{ route('users.create') }}" class="btn btn-primary mb-3">Crear Usuario</a>
+            <a href="{{ route('equipos.create') }}" class="btn btn-primary mb-3">Crear Equipos</a>
             
             <!-- Opción de escoger las filas a mostrar en la tabla -->
-            <form action="{{ route('users.index') }}" method="GET" class="form-inline">
+            <form action="{{ route('equipos.index') }}" method="GET" class="form-inline">
                 <label for="rowsNumber" class="mr-2">Filas por página:</label>
-                <select name="rowsNumber" id="rowsNumber" class="form-control" onchange="this.form.submit()"
-                    style="background-color: #E2E3E5">
+                <select name="rowsNumber" id="rowsNumber" class="form-control" onchange="this.form.submit()" style="background-color: #E2E3E5">
                     @foreach ($listaNoFilas as $option)
                         <option value="{{ $option }}" {{ $noFilas == $option ? 'selected' : '' }}>
                             {{ $option }}</option>
@@ -72,23 +55,25 @@
         <table class="table table-secondary">
             <thead>
                 <tr>
-                    <th>Nombre de Usuario</th>
-                    <th>Rol</th>
+                    <th>Nº Serie</th>
+                    <th>Equipo</th>
+                    {{-- <th>Fecha de Nacimiento</th> --}}
                     <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($users as $user)
+                @foreach ($equipos as $equipo)
                     <tr>
-                        <td>{{ $user->name }}</td>
-                        <td>{{ $user->rol }}</td>
-                   
+                        <td>{{ $equipo->no_serie }}</td>
+                        <td>{{ $equipo->tipo_equipo }}</td>
+                        {{-- <td>{{ $propietario->fecha_nacimiento }}</td> --}}
 
                         <!-- botones -->
                         <td style="width: 300px">
-                            <a href="{{ route('users.show', $user->id) }}" class="btn ml-2 mr-2" style="background-color: #329702; color: #ffffff;">Ver Detalles</a>
-                            <a href="{{ route('users.edit', $user->id) }}" class="btn btn-warning ml-2 mr-2">Editar</a>
-                            <button type="button" class="btn ml-2 mr-2"  style="background-color: #fd0000; color: #ffffff; " data-bs-toggle="modal"
+                            <a href="{{ route('equipos.show', $equipo->id) }}" class="btn btn-info ml-2 mr-2">Ver
+                                Detalles</a>
+                            <a href="{{ route('equipos.edit', $equipo->id) }}" class="btn btn-warning ml-2 mr-2">Editar</a>
+                            <button type="button" class="btn btn-danger ml-2 mr-2" data-bs-toggle="modal"
                                 data-bs-target="#exampleModal{{ $indice }}">
                                 Eliminar
                             </button>
@@ -100,15 +85,15 @@
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Eliminar Perfil</h1>
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Eliminar Equipo</h1>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        ¿Desea eliminar este usuario?
+                                        ¿Desea eliminar este Equipo?
                                     </div>
                                     <div class="modal-footer">
-                                        <form action="{{ route('users.destroy', $user->id) }}" method="post">
+                                        <form action="{{ route('equipos.destroy', $equipo->id) }}" method="post">
                                             @method('DELETE')
                                             @csrf
                                             <button type="button" class="btn btn-secondary"
@@ -130,10 +115,11 @@
         </table>
         <div>
             @if (isset($busqueda))
-                {{ $users->appends(['rowsNumber' => $noFilas, 'find' => $busqueda])->links() }}
+                {{ $equipos->appends(['rowsNumber' => $noFilas, 'find' => $busqueda])->links() }}
             @else
-                {{ $users->appends(['rowsNumber' => $noFilas])->links() }}
+                {{ $equipos->appends(['rowsNumber' => $noFilas])->links() }}
             @endif
+
         </div>
     </div>
 @endsection

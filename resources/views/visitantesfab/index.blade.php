@@ -11,16 +11,22 @@
 
 @section('content')
     <div class="container mt-5">
+<<<<<<< HEAD:resources/views/visitantesfab/index.blade.php
         <h2>Visitante de Fábrica</h2>
         <br>
        
         <div class="d-flex justify-content-between align-items-center mb-3">
             <a href="{{ route('visitantesfab.create') }}" class="btn mb-3" style="background-color: #329702; color: #ffffff;">Registrar Visitante</a>
             <form action="{{ route('visitantesfab.find') }}" method="post" class="form-inline">
+=======
+        <div class="d-flex justify-content-between align-items-top">
+            <h2>Devoluciones</h2>
+            <form action="{{ route('devoluciones.index') }}" method="get" class="form-inline" >
+>>>>>>> d2f29c56afedeae808201d395706ea3bb4bb7308:resources/views/devoluciones/index.blade.php
                 @csrf
                 <div class="input-group mb-3">
                     <input type="text" name="find" class="form-control" placeholder="Buscar..." aria-label="Buscar"
-                        aria-describedby="button-addon2">
+                        aria-describedby="button-addon2" style="background-color: #E2E3E5">
                     <button type="submit" class="btn btn-outline-primary" type="button" id="button-addon2">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                             class="bi bi-search" viewBox="0 0 16 16">
@@ -29,17 +35,31 @@
                             </path>
                         </svg>
                     </button>
+<<<<<<< HEAD:resources/views/visitantesfab/index.blade.php
                     <a href="{{ route('visitantesfab.index') }}" class="btn" style="background-color: #fd0000;" type="button" id="button-addon2">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
                             <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
                           </svg>
+=======
+                    <a href="{{ route('devoluciones.index') }}" class="btn btn-danger" type="button" id="button-addon2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-x" viewBox="0 0 16 16">
+                            <path
+                                d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
+                        </svg>
+>>>>>>> d2f29c56afedeae808201d395706ea3bb4bb7308:resources/views/devoluciones/index.blade.php
                     </a>
                 </div>
             </form>
+        </div>
+        <br>
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <a href="{{ route('devoluciones.create') }}" class="btn btn-primary mb-3">Crear Devolucion</a>
+            
             <!-- Opción de escoger las filas a mostrar en la tabla -->
             <form action="{{ route('visitantesfab.index') }}" method="GET" class="form-inline">
                 <label for="rowsNumber" class="mr-2">Filas por página:</label>
-                <select name="rowsNumber" id="rowsNumber" class="form-control" onchange="this.form.submit()">
+                <select name="rowsNumber" id="rowsNumber" class="form-control" onchange="this.form.submit()" style="background-color: #E2E3E5">
                     @foreach ($listaNoFilas as $option)
                         <option value="{{ $option }}" {{ $noFilas == $option ? 'selected' : '' }}>
                             {{ $option }}</option>
@@ -47,7 +67,7 @@
                 </select>
             </form>
         </div>
-        <table class="table">
+        <table class="table table-secondary">
             <thead>
                 <tr>
                     <th>Nombre Completo</th>
@@ -64,6 +84,7 @@
             <tbody>
                 @foreach ($visitantesfab as $visitantefab)
                     <tr>
+<<<<<<< HEAD:resources/views/visitantesfab/index.blade.php
                         <td>{{ $visitantefab->nombre_completo }}</td>
                         <td>{{ $visitantefab->fecha_entrada }}</td>
                         <td>{{ $visitantefab->motivo_visita }}</td>
@@ -80,6 +101,18 @@
                             <a href="{{ route('visitantesfab.edit', $visitantefab->id) }}"
                                 class="btn btn-warning ml-2 mr-2">Editar</a>
                             <button type="button" class="btn ml-2 mr-2" style="background-color: #fd0000; color: #ffffff; ;" data-bs-toggle="modal"
+=======
+                        <td>{{ $devolucion->fecha_devolucion }}</td>
+                        <td>{{ $devolucion->equipo->tipo_equipo . ' - ' . $devolucion->equipo->no_serie }}</td>
+                        <td>{{ $devolucion->usuario->name }}</td>
+
+                        <!-- botones -->
+                        <td style="width: 300px">
+                            <a href="{{ route('devoluciones.show', $devolucion->id) }}" class="btn btn-info">Ver
+                                Detalles</a>
+                            <a href="{{ route('devoluciones.edit', $devolucion->id) }}" class="btn btn-warning">Editar</a>
+                            <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+>>>>>>> d2f29c56afedeae808201d395706ea3bb4bb7308:resources/views/devoluciones/index.blade.php
                                 data-bs-target="#exampleModal{{ $indice }}">
                                 Eliminar
                             </button>
@@ -119,7 +152,15 @@
             </tbody>
         </table>
         <div>
+<<<<<<< HEAD:resources/views/visitantesfab/index.blade.php
             {{ $visitantesfab->appends(['rowsNumber' => $noFilas])->links() }}
+=======
+            @if (isset($busqueda))
+                {{ $devoluciones->appends(['rowsNumber' => $noFilas, 'find' => $busqueda])->links() }}
+            @else
+                {{ $devoluciones->appends(['rowsNumber' => $noFilas])->links() }}
+            @endif
+>>>>>>> d2f29c56afedeae808201d395706ea3bb4bb7308:resources/views/devoluciones/index.blade.php
         </div>
     </div>
 @endsection

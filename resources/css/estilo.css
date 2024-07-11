@@ -33,3 +33,19 @@ body {
 .modal-header{
     color:black;
 }
+
+.input-group{
+    border-color: white;
+}
+
+p .small, .text-muted{
+    color: white;
+}
+
+.pag{
+    background-color: #E63946;
+}
+
+.t{
+    border-radius: 5px;
+}

@@ -11,6 +11,7 @@
 
 @section('content')
     <div class="container mt-5">
+<<<<<<< HEAD:resources/views/visitanteslab/index.blade.php
         <h2>Visitante de Laboratorio</h2>
         <br>
         <div id="exportAlert" class="alert alert-info alert-dismissible fade show" role="alert" style="display: none;">
@@ -20,10 +21,15 @@
         <div class="d-flex justify-content-between align-items-center mb-3">
             <a href="{{ route('visitanteslab.create') }}" class="btn mb-3" style="background-color: #329702; color: #ffffff;">Registrar Visitante</a>   <a href="{{ route('export') }}" class="btn mb-3 export-button" style="background-color: #ffc400; color: #000000;">Exportar a Excel</a>
             <form action="{{ route('visitanteslab.find') }}" method="post" class="form-inline">
+=======
+        <div class="d-flex justify-content-between align-items-top">
+            <h2>Entregas</h2>
+            <form action="{{ route('entregas.index') }}" method="get" class="form-inline">
+>>>>>>> d2f29c56afedeae808201d395706ea3bb4bb7308:resources/views/entregas/index.blade.php
                 @csrf
                 <div class="input-group mb-3">
-                    <input type="text" name="find" class="form-control" placeholder="Buscar..." aria-label="Buscar"
-                        aria-describedby="button-addon2">
+                    <input type="text" name="find" class="form-control bg-ligth" placeholder="Buscar..."
+                        aria-label="Buscar" aria-describedby="button-addon2" style="background-color: #E2E3E5">
                     <button type="submit" class="btn btn-outline-primary" type="button" id="button-addon2">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                             class="bi bi-search" viewBox="0 0 16 16">
@@ -32,17 +38,34 @@
                             </path>
                         </svg>
                     </button>
+<<<<<<< HEAD:resources/views/visitanteslab/index.blade.php
                     <a href="{{ route('visitanteslab.index') }}" class="btn " style="background-color: #fd0000; " type="button" id="button-addon2">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
                             <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
                           </svg>
+=======
+                    <a href="{{ route('entregas.index') }}" class="btn btn-danger" type="button" id="button-addon2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-x" viewBox="0 0 16 16">
+                            <path
+                                d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
+                        </svg>
+>>>>>>> d2f29c56afedeae808201d395706ea3bb4bb7308:resources/views/entregas/index.blade.php
                     </a>
                 </div>
             </form>
+<<<<<<< HEAD:resources/views/visitanteslab/index.blade.php
+=======
+        </div>
+        <br>
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <a href="{{ route('entregas.create') }}" class="btn btn-primary mb-3">Crear Entrega</a>
+            
+>>>>>>> d2f29c56afedeae808201d395706ea3bb4bb7308:resources/views/entregas/index.blade.php
             <!-- Opción de escoger las filas a mostrar en la tabla -->
             <form action="{{ route('visitanteslab.index') }}" method="GET" class="form-inline">     
                 <label for="rowsNumber" class="mr-2">Filas por página:</label>
-                <select name="rowsNumber" id="rowsNumber" class="form-control" onchange="this.form.submit()">
+                <select name="rowsNumber" id="rowsNumber" class="form-control" onchange="this.form.submit()" style="background-color: #E2E3E5">
                     @foreach ($listaNoFilas as $option)
                         <option value="{{ $option }}" {{ $noFilas == $option ? 'selected' : '' }}>
                             {{ $option }}</option>
@@ -50,7 +73,7 @@
                 </select>
             </form>
         </div>
-        <table class="table">
+        <table class="table table-secondary">
             <thead>
                 <tr>
                    
@@ -116,7 +139,16 @@
             </tbody>
         </table>
         <div>
+<<<<<<< HEAD:resources/views/visitanteslab/index.blade.php
             {{ $visitanteslab->appends(['rowsNumber' => $noFilas])->links() }}
+=======
+
+            @if (isset($busqueda))
+                {{ $entregas->appends(['rowsNumber' => $noFilas, 'find' => $busqueda])->links() }}
+            @else
+                {{ $entregas->appends(['rowsNumber' => $noFilas])->links() }}
+            @endif
+>>>>>>> d2f29c56afedeae808201d395706ea3bb4bb7308:resources/views/entregas/index.blade.php
         </div>
     </div>
     <script>

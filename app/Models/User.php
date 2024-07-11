@@ -44,6 +44,13 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+<<<<<<< HEAD
+=======
+    public function propietario()
+    {
+        return $this->belongsTo(Propietario::class, 'id_propietario')->withTrashed();
+    }
+>>>>>>> d2f29c56afedeae808201d395706ea3bb4bb7308
 
     //funcion que verificara si el usuario es de tipo Admin
     public function isAdminDC(){
